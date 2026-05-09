@@ -9,13 +9,12 @@ export default function Home() {
       <Navbar />
 
       <div className="flex flex-1 min-h-0">
-
         {/* Left — Block palette */}
         <BlockPalette />
 
         {/* Center — Sortable editor */}
-        <main className="w-150 shrink-0 bg-[#0f0f0f] border-r border-[#1a1a1a] flex flex-col min-h-0">
-          <div className="px-4 pt-3.5 pb-2.5 border-b border-[#1a1a1a] flex items-center justify-between shrink-0">
+        <main className="w-[40rem] shrink-0 bg-[#0f0f0f] border-r border-[#1a1a1a] flex flex-col min-h-0">
+          <div className="px-3 pt-3.5 pb-2.5 border-b border-[#1a1a1a] flex items-center justify-between shrink-0">
             <p className="text-[10px] font-mono text-[#444] uppercase tracking-widest">Editor</p>
             <p className="text-[10px] font-mono text-[#2a2a2a]">drag to reorder</p>
           </div>
@@ -25,7 +24,7 @@ export default function Home() {
         </main>
 
         {/* Right — Live preview */}
-        <div className="flex-1 flex flex-col min-h-0 bg-[#0d0d0d]">
+        <div className="flex-1 flex flex-col min-h-0">
           <div className="px-5 pt-3.5 pb-2.5 border-b border-[#1a1a1a] flex items-center justify-between shrink-0">
             <p className="text-[10px] font-mono text-[#444] uppercase tracking-widest">Preview</p>
             <div className="flex items-center gap-1.5">
@@ -33,10 +32,11 @@ export default function Home() {
               <span className="w-1.5 h-1.5 rounded-full bg-[#4ade80] animate-pulse" />
             </div>
           </div>
-          <MarkdownPreview />
+          <div className="flex-1 overflow-y-auto bg-[#0d0d0d]">
+             <MarkdownPreview />
+          </div>
         </div>
-
       </div>
     </div>
-  )
+  );
 }

@@ -40,10 +40,12 @@ export default function SortableBlockList() {
   return (
     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
       <SortableContext items={blocks.map(b => b.id)} strategy={verticalListSortingStrategy}>
-        <div className="space-y-2 p-4">
-          {blocks.map(block => (
-            <BlockItem key={block.id} block={block} />
-          ))}
+        <div className="h-full">
+          <div className="space-y-2 !p-4">
+            {blocks.map(block => (
+              <BlockItem key={block.id} block={block} />
+            ))}
+          </div>
         </div>
       </SortableContext>
     </DndContext>
