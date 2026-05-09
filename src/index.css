@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@import url('https://fonts.googleapis.com/css2?family=Story+Script&display=swap');
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -24,7 +26,9 @@
   --radius:    8px;
   --radius-lg: 12px;
   --font:      'Instrument Sans', sans-serif;
-  --font-head: 'Syne', sans-serif;
+  /* --font-head: 'Syne', sans-serif; */
+  --font-head: "Story Script",
+    sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --nav-h:     56px;
   --sidebar-w: 220px;
