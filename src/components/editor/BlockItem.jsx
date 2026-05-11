@@ -13,6 +13,7 @@ import ApiBlock from '../blocks/ApiBlock.jsx';
 import ContributingBlock from '../blocks/ContributingBlock.jsx';
 import LicenseBlock from '../blocks/LicenseBlock.jsx';
 import CustomBlock from '../blocks/CustomBlock.jsx';
+import { ChevronDown, Copy, Trash } from 'lucide-react';
 
 const BLOCK_COMPONENTS = {
   [BLOCK_TYPES.TITLE]: TitleBlock,
@@ -77,10 +78,10 @@ export default function BlockItem({ block }) {
           </svg>
         </div>
 
-        <span className="text-xs font-mono w-5 text-center shrink-0" style={{ color: meta?.color }}>
+        <span className="text-[15px] ml-1 font-mono w-5 text-center shrink-0" style={{ color: meta?.color }}>
           {meta?.icon}
         </span>
-        <span className="text-xs text-[#666] flex-1 font-medium">{meta?.label}</span>
+        <span className="text-[15px] ml-2 font-medium tracking-right text flex-1">{meta?.label}</span>
 
         {/* Duplicate */}
         <button
@@ -91,7 +92,7 @@ export default function BlockItem({ block }) {
           className="text  text-xs transition-colors px-1"
           title="Duplicate"
         >
-          ⧉
+          <Copy size={15} />
         </button>
 
         {/* Remove */}
@@ -103,13 +104,13 @@ export default function BlockItem({ block }) {
           className="text text-xs hover:text-[#ff5757] text-base leading-none transition-colors"
           title="Remove block"
         >
-          ×
+          <Trash size={15} />
         </button>
 
         <span
-          className={`text  text-xs transition-transform duration-200 ${isActive ? 'rotate-180' : ''}`}
+          className={`text transition-transform duration-200 ${isActive ? 'rotate-180' : ''}`}
         >
-          ▾
+          <ChevronDown size={15} />
         </span>
       </div>
 
