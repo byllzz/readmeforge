@@ -25,13 +25,6 @@ export default function Home() {
 
         {/* Right — Live preview */}
         <div className="flex-1 flex flex-col min-h-0">
-          <div className="px-5 pt-3.5 pb-2.5 border-b border-[#1a1a1a] flex items-center justify-between shrink-0">
-            <p className="text-[10px] font-mono text-[#444] uppercase tracking-widest">Preview</p>
-            <div className="flex items-center gap-1.5">
-              <span className="text-[10px] font-mono text-[#2a2a2a]">live</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#4ade80] animate-pulse" />
-            </div>
-          </div>
           <div className="flex-1 overflow-y-auto">
              <MarkdownPreview />
           </div>
