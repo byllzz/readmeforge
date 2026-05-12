@@ -2,12 +2,12 @@
 import { BLOCK_TYPES } from './blocks.js'
 
 export function blocksToMarkdown(blocks) {
-  console.log('=== blocksToMarkdown called ===')
-  console.log('Blocks:', blocks.map(b => ({ type: b.type, hasContent: !!b.content })))
+  // console.log('=== blocksToMarkdown called ===')
+  // console.log('Blocks:', blocks.map(b => ({ type: b.type, hasContent: !!b.content })))
 
   const result = blocks.map(b => blockToMd(b.type, b.content)).filter(Boolean).join('\n\n---\n\n')
-  console.log('Final markdown length:', result.length)
-  console.log('First 500 chars:', result.substring(0, 500))
+  // console.log('Final markdown length:', result.length)
+  // console.log('First 500 chars:', result.substring(0, 500))
 
   return result
 }
@@ -40,18 +40,18 @@ function blockToMd(type, c) {
       return `## 📖 Usage\n\n\`\`\`${c.language || 'js'}\n${c.code || ''}\n\`\`\``
 
     case BLOCK_TYPES.SCREENSHOTS:
-      console.log('📸 Processing screenshots, content:', c)
+      // console.log('📸 Processing screenshots, content:', c)
       const items = c.items || []
 
       // Filter items with valid string URLs
       const validImages = items.filter(i => {
         const isValid = i.url && typeof i.url === 'string' && i.url.trim() !== ''
-        if (!isValid) console.log('Invalid image:', i)
+        // if (!isValid) console.log('Invalid image:', i)
         return isValid
       })
 
       if (validImages.length === 0) {
-        console.log('No valid images, returning empty string')
+        // console.log('No valid images, returning empty string')
         return ''
       }
 
@@ -59,12 +59,12 @@ function blockToMd(type, c) {
         const alt = i.alt || 'Screenshot'
         const url = i.url.trim()
         const caption = i.caption ? `\n\n*${i.caption}*` : ''
-        console.log(`Adding image: ${alt} -> ${url}`)
+        // console.log(`Adding image: ${alt} -> ${url}`)
         return `![${alt}](${url})${caption}`
       }).join('\n\n')
 
       const result = `## 📸 Screenshots\n\n${imgs}`
-      console.log('Generated screenshots markdown:', result.substring(0, 200))
+      // console.log('Generated screenshots markdown:', result.substring(0, 200))
       return result
 
     case BLOCK_TYPES.API: {

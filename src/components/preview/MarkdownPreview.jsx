@@ -2,13 +2,13 @@ import { useMemo, useState, useEffect } from 'react'
 import { marked } from 'marked'
 import useReadme from '../../store/useReadme.js'
 import { blocksToMarkdown } from '../../lib/markdown.js'
-import { Check, Code2, Eye, Download, Camera, Copy } from 'lucide-react'
+import { Check, Code2, Eye, Download, Camera, Copy, FileWarning } from 'lucide-react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 marked.setOptions({ breaks: true, gfm: true })
 
-/* ─── Empty state ─── */
+/* empty */
 function EmptyPreview() {
   return (
     <div className="h-full flex items-center justify-center min-h-[400px]">
@@ -19,7 +19,7 @@ function EmptyPreview() {
         </div>
         <div className="space-y-1.5">
           <p className="text-[13px] font-mono font-semibold text-white/60 tracking-tight">Empty Preview</p>
-          <p className="text-[11px] text-white/25 leading-relaxed font-mono">
+          <p className="text-[11px] text-white/25 leading-relaxed">
             Add blocks to see your README rendered here
           </p>
         </div>
@@ -28,18 +28,20 @@ function EmptyPreview() {
   )
 }
 
-/* ─── Stat chip ─── */
+/*  Stat chips */
 function StatChip({ icon, label }) {
   return (
-    <div className="flex items-center gap-1.5 px-2 py-1 rounded-md
-                    bg-black border border-white/[0.06]">
+    <div
+      className="flex items-center gap-1.5 px-2 py-1 rounded-md
+                    bg-[#a8ff57] text-black! border border-white/[0.06]"
+    >
       {icon}
-      <span className="text-[12px] font-mono text">{label}</span>
+      <span className="text-[12px] font-medium text">{label}</span>
     </div>
-  )
+  );
 }
 
-/* ─── Action button ─── */
+/* Action button */
 function ActionBtn({ onClick, done, doneLabel, idleLabel, icon }) {
   return (
     <button
@@ -103,7 +105,7 @@ export default function MarkdownPreview() {
     marked.use({ renderer, mangle: false, headerIds: false })
     try {
       const result = marked.parse(raw)
-      // marked v4+ returns a string synchronously; older/async builds return a Promise
+      // marked v4+ returns a string synchronously; older/async builds to return a Promise
       if (result && typeof result.then === 'function') {
         result.then(setHtml).catch(err => {
           setHtml(`<div class="md-error">Error: ${err.message}</div>`)
@@ -134,7 +136,7 @@ export default function MarkdownPreview() {
   const validScreenshots  = screenshotsBlock?.content?.items?.filter(i => i.url?.trim()) || []
   const screenshotsKey    = validScreenshots.map(s => s.url).join(',')
 
-  /* Custom vscDarkPlus override — richer background, subtle line highlight */
+  /* Custom vscDarkPlus override */
   const codeTheme = {
     ...vscDarkPlus,
     'pre[class*="language-"]': {
@@ -151,98 +153,96 @@ export default function MarkdownPreview() {
       background: 'none',
       fontSize: '12.5px',
     },
-  }
+  };
 
   return (
     <>
-      {/* ══ Toolbar ══ */}
+      {/* Toolbar */}
       <div
         className="sticky top-0 z-10 flex-shrink-0 border-b border-white/[0.05] bg-[#1F1F1F]
                       px-4 py-2.5 flex flex-col items-start gap-2
                       "
       >
-        {/* Left — tab switcher + title */}
+        {/* Left */}
 
-        <div className='flex items-center justify-between w-full'>
-        <div className="flex items-center gap-3">
-          <div className="flex items-center p-[3px] rounded-xl bg-white/[0.05] border border-white/[0.07] gap-0.5 ">
-            {[
-              { id: 'preview', icon: <Eye size={15} />, label: 'Preview' },
-              { id: 'code', icon: <Code2 size={15} />, label: 'Code' },
-            ].map(tab => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`
+        <div className="flex items-center justify-between w-full">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center p-[3px] rounded-xl bg-white/[0.05] border border-white/[0.07] gap-0.5 ">
+              {[
+                { id: 'preview', icon: <Eye size={15} />, label: 'Preview' },
+                { id: 'code', icon: <Code2 size={15} />, label: 'Code' },
+              ].map(tab => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`
                   flex items-center gap-1.5 px-3 py-1.5 rounded-[9px]
                   text-[11px] font-mono transition-all duration-200
                   ${
                     activeTab === tab.id
-                      ? 'bg-white! text-black! shadow-sm font-semibold'
+                      ? 'bg-[#a8ff57]! text-black! shadow-sm font-semibold'
                       : 'text-white/40 hover:text-white/70'
                   }
                 `}
-              >
-                {tab.icon}
-                <span>{tab.label}</span>
-              </button>
-            ))}
+                >
+                  {tab.icon}
+                  <span>{tab.label}</span>
+                </button>
+              ))}
+            </div>
+
+            <span className="text-[11px] font-mono tracking-tight text-white/70 hidden sm:block">
+              README.md
+            </span>
           </div>
 
-          <span className="text-[11px] font-mono tracking-tight text-white/70 hidden sm:block">
-            README.md
-          </span>
+          {/* Right */}
+          <div className="flex items-center gap-2 flex-wrap justify-end">
+            <div className="w-px h-4 bg-white/[0.07] mx-1" />
+
+            <ActionBtn
+              onClick={copyMarkdown}
+              done={copied}
+              idleLabel="Copy"
+              doneLabel="Copied!"
+              icon={<Copy size={11} />}
+            />
+            <ActionBtn
+              onClick={downloadReadme}
+              done={downloading}
+              idleLabel="Download"
+              doneLabel="Saved!"
+              icon={<Download size={11} />}
+            />
+          </div>
         </div>
 
-        {/* Right — stats + actions */}
-        <div className="flex items-center gap-2 flex-wrap justify-end">
-          <div className="w-px h-4 bg-white/[0.07] mx-1" />
-
-          <ActionBtn
-            onClick={copyMarkdown}
-            done={copied}
-            idleLabel="Copy"
-            doneLabel="Copied!"
-            icon={<Copy size={11} />}
-          />
-          <ActionBtn
-            onClick={downloadReadme}
-            done={downloading}
-            idleLabel="Download"
-            doneLabel="Saved!"
-            icon={<Download size={11} />}
-          />
-        </div>
-
-        </div>
-
-      <div  className="flex items-center justify-end gap-2 mt-2 px-1 w-full">
+        {/* bottom */}
+        <div className="flex items-center justify-end gap-2 mt-2 px-1 w-full">
           <StatChip
-          icon={<Camera size={14} className="text" />}
-          label={`${validScreenshots.length} img`}
-        />
-        <StatChip
-          icon={
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-            >
-              <path d="M4 7h16M4 12h16M4 17h10" />
-            </svg>
-          }
-          label={`${wordCount}w · ${kbSize}KB`}
-        />
-      </div>
-
-
+            icon={<Camera size={14} className="text" />}
+            label={`${validScreenshots.length} img`}
+          />
+          <StatChip
+            icon={
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              >
+                <path d="M4 7h16M4 12h16M4 17h10" />
+              </svg>
+            }
+            label={`${wordCount}w · ${kbSize}KB`}
+          />
+        </div>
       </div>
 
       <div className="flex-1 min-h-0 flex flex-col overflow-hidden relative">
-        {/* ══ Content area ══ */}
+        {/* Content area */}
         {blocks.length === 0 ? (
           <EmptyPreview />
         ) : (
@@ -257,7 +257,9 @@ export default function MarkdownPreview() {
                             bg-amber-500/8 border border-amber-500/20
                             flex items-start gap-2"
               >
-                <span className="text-amber-400/80 text-[12px]">⚠️</span>
+                <span className="text-amber-400/80 text-[12px] relative top-1.5">
+                  <FileWarning size={12} />
+                </span>
                 <div>
                   <p className="text-[11px] font-mono text-amber-400/70">
                     Screenshots block has no valid URLs yet
@@ -282,7 +284,7 @@ export default function MarkdownPreview() {
               </div>
             )}
 
-            {/* ── Preview tab ── */}
+            {/*  Preview tab */}
             {activeTab === 'preview' &&
               (!raw?.trim() ? (
                 <div className="text-center py-16 text-[12px] font-mono text-white/20">
@@ -300,7 +302,7 @@ export default function MarkdownPreview() {
                 </div>
               ))}
 
-            {/* ── Code tab ── */}
+            {/*  Code tab  */}
             {activeTab === 'code' && (
               <div className="flex flex-col h-full">
                 {/* Code header bar */}
@@ -361,6 +363,7 @@ export default function MarkdownPreview() {
                       fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
                       borderRight: '1px solid rgba(255,255,255,0.05)',
                       marginRight: '1.25em',
+                      marginLeft: '10px',
                     }}
                     customStyle={{
                       background: '#0d0d0d',
@@ -415,7 +418,7 @@ export default function MarkdownPreview() {
   );
 }
 
-/* ─── Preview footer ─── */
+/* Preview footer */
 function PreviewFooter({ raw, kbSize }) {
   return (
     <div className="mt-10 pt-5 border-t border-white/[0.05]
@@ -439,7 +442,7 @@ function PreviewFooter({ raw, kbSize }) {
   )
 }
 
-/* ─── Markdown preview CSS ─── */
+/* Markdown preview CSS */
 const PREVIEW_CSS = `
   .markdown-preview {
     color: #c0c0b8;

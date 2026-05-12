@@ -13,7 +13,9 @@
 
   background: var(--lp-bg);
   color: var(--lp-text);
-  font-family: 'JetBrains Mono', monospace;
+  /* font-family: 'JetBrains Mono', monospace; */
+  font-family: "IBM Plex Serif",
+    serif;
   font-size: 14px;
   line-height: 1.6;
   overflow-x: hidden;
@@ -171,7 +173,7 @@
 }
 
 .lp-hero-title {
-  font-family: 'Carter One', sans-serif;
+  /* font-family: 'Carter One', sans-serif; */
   font-weight: 800;
   font-size: clamp(52px, 8vw, 96px);
   line-height: 0.95;
@@ -647,7 +649,7 @@
 }
 
 .lp-cta-title {
-  font-family: 'Carter One', sans-serif;
+  /* font-family: 'Carter One', sans-serif; */
   font-weight: 800;
   font-size: clamp(40px, 6vw, 72px);
   letter-spacing: -0.04em;

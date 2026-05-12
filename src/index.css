@@ -6,6 +6,7 @@
 
 :root {
   --bg:        #1F1F1E;
+  /* --bg : #F8F8F6; */
   --bg2:       #141416;
   --bg3:       #1a1a1e;
   --bg4:       #222228;
@@ -26,10 +27,8 @@
   --radius:    8px;
   --radius-lg: 12px;
   --font:      'Outfit', sans-serif;
-  /* --font:      'Instrument Sans', sans-serif; */
   --font-head: "Story Script",
     sans-serif;
-  /* --font-mono: 'JetBrains Mono', monospace; */
   --font-mono:"IBM Plex Serif", serif;
   --nav-h:     56px;
   --sidebar-w: 220px;
@@ -45,9 +44,9 @@ html, body, #root {
   -webkit-font-smoothing: antialiased;
 }
 
-::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar { width: 4px;height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; width : 4px !important; }
 ::selection { background: var(--accent-bg); color: var(--accent); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: var(--radius); }
 
