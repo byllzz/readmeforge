@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import BlockPalette from './components/editor/BlockPalette.jsx'
 import SortableBlockList from './components/editor/SortableBlockList.jsx'
 import MarkdownPreview from './components/preview/MarkdownPreview.jsx'
-import { ChevronDown, Layers, LayoutGrid, X } from 'lucide-react'
+import OnboardingPopup from './components/OnboardingPopup.jsx'
+import { ChevronDown, Layers, LayoutGrid, X, HelpCircle } from 'lucide-react'
 import useReadme from './store/useReadme.js'
 
 /* ── Mobile Drawer (white version) ── */
@@ -26,15 +27,12 @@ function MobileDrawer({ open, onClose, title, children }) {
 
   return (
     <>
-      {/* Backdrop */}
       <div
         onClick={onClose}
         aria-hidden="true"
         className="md:hidden fixed inset-0 z-50 bg-black/30 backdrop-blur-sm transition-opacity duration-300"
         style={{ opacity: open ? 1 : 0, pointerEvents: open ? 'auto' : 'none' }}
       />
-
-      {/* Panel */}
       <div
         role="dialog"
         aria-modal="true"
@@ -45,7 +43,6 @@ function MobileDrawer({ open, onClose, title, children }) {
                    transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
         style={{ transform: open ? 'translateX(0)' : 'translateX(100%)' }}
       >
-        {/* Drawer header */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 shrink-0">
           <span className="text-[13px] font-medium text-gray-600">{title}</span>
           <button
@@ -58,8 +55,6 @@ function MobileDrawer({ open, onClose, title, children }) {
             <X size={14} />
           </button>
         </div>
-
-        {/* Content */}
         <div className="flex-1 min-h-0 overflow-hidden flex flex-col bg-white">
           {everOpened ? children : null}
         </div>
@@ -73,7 +68,6 @@ function MobileNavbar({ blocksCount, onBlocksClick, onPaletteClick, activeTab })
   return (
     <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 shadow-lg shadow-black/5">
       <div className="flex items-center justify-around h-16 px-4 pb-safe">
-        {/* Blocks tab */}
         <button
           onClick={onBlocksClick}
           className={`flex flex-col items-center justify-center gap-1 w-full h-full rounded-lg transition-colors
@@ -90,7 +84,6 @@ function MobileNavbar({ blocksCount, onBlocksClick, onPaletteClick, activeTab })
           <span className="text-[11px] font-medium">Blocks</span>
         </button>
 
-        {/* Palette tab */}
         <button
           onClick={onPaletteClick}
           className={`flex flex-col items-center justify-center gap-1 w-full h-full rounded-lg transition-colors
@@ -110,11 +103,28 @@ export default function Home({ onLogout }) {
 
   const [paletteOpen, setPaletteOpen] = useState(false)
   const [blocksOpen, setBlocksOpen] = useState(false)
-  const [mobileActiveTab, setMobileActiveTab] = useState(null) // 'blocks' | 'palette' | null
+  const [mobileActiveTab, setMobileActiveTab] = useState(null)
+  const [showOnboarding, setShowOnboarding] = useState(false)
+
+  // Show onboarding once per browser session (not per login)
+  useEffect(() => {
+    const hasSeen = sessionStorage.getItem('readmeforge:onboarded');
+    if (!hasSeen) {
+      // Small delay so the editor is visible first
+      const timer = setTimeout(() => {
+        setShowOnboarding(true);
+        sessionStorage.setItem('readmeforge:onboarded', 'true');
+      }, 600);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  const handleCloseOnboarding = () => {
+    setShowOnboarding(false);
+  };
 
   const handleBlocksClick = () => {
     if (mobileActiveTab === 'blocks') {
-      // Toggle off
       setBlocksOpen(false);
       setMobileActiveTab(null);
     } else {
@@ -126,7 +136,6 @@ export default function Home({ onLogout }) {
 
   const handlePaletteClick = () => {
     if (mobileActiveTab === 'palette') {
-      // Toggle off
       setPaletteOpen(false);
       setMobileActiveTab(null);
     } else {
@@ -147,16 +156,12 @@ export default function Home({ onLogout }) {
   };
 
   return (
-    /* Main wrapper – white background */
     <div className="flex flex-col h-screen bg-white">
       <div className="flex flex-1 min-h-0">
         {/* ── Left: Block palette — desktop only ── */}
-        <div className="hidden md:flex">
+        <div className="hidden md:flex border-r border-[#d9d0d0]">
           <BlockPalette userEmail={email} onLogout={onLogout} />
         </div>
-
-        {/* Separator */}
-        <div className="hidden md:block h-screen w-[1px] bg-[#d9d0d0]" />
 
         {/* ── Center: Sortable editor — desktop only ── */}
         <main className="hidden md:flex w-[41rem] shrink-0 flex-col min-h-0 bg-white">
@@ -169,18 +174,29 @@ export default function Home({ onLogout }) {
           </div>
         </main>
 
-        {/* Resizer handle */}
-        <div className="h-screen w-[.5px] bg-[#d9d0d0] relative hover:bg-blue-500 transition-colors hover:cursor-row-resize">
+        <div className=" h-screen w-[1px] bg-[#d9d0d0] relative hover:bg-blue-500 transition-colors hover:cursor-row-resize">
           <div className="absolute top-1/2 -translate-y-1/2 h-[24px] w-2 rounded-full -left-[2.5px] bg-[#aaa] group-hover:bg-blue-500 shadow-2xl z-10" />
         </div>
 
-        {/* ── Right: Live preview — always visible, full width on mobile ── */}
+        {/* ── Right: Live preview ── */}
         <div className="flex-1 flex flex-col min-h-0 overflow-hidden bg-white pb-16 md:pb-0">
           <div className="flex-1 overflow-y-auto">
             <MarkdownPreview />
           </div>
         </div>
       </div>
+
+      {/* ── "How it works" button (fixed bottom‑right) ── */}
+      {/* <button
+        onClick={() => setShowOnboarding(true)}
+        className="fixed bottom-20 md:bottom-6 right-5 z-30 flex items-center gap-2 px-4 py-2.5 rounded-full
+                   bg-gray-900 text-white text-sm font-medium shadow-lg shadow-black/20
+                   hover:bg-gray-800 active:scale-[0.97] transition-all duration-200"
+        title="How it works"
+      >
+        <HelpCircle size={16} />
+        <span className="hidden sm:inline">How it works</span>
+      </button> */}
 
       {/* ── Mobile Bottom Navbar ── */}
       <MobileNavbar
@@ -192,7 +208,9 @@ export default function Home({ onLogout }) {
 
       {/* ── Mobile drawers ── */}
       <MobileDrawer open={paletteOpen} onClose={handleClosePalette} title="Block palette">
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflowY: 'auto' }}>
+        <div
+          style={{ display: 'flex', flexDirection: 'column', height: '100%', overflowY: 'auto' }}
+        >
           <BlockPalette userEmail={email} onLogout={onLogout} />
         </div>
       </MobileDrawer>
@@ -202,6 +220,9 @@ export default function Home({ onLogout }) {
           <SortableBlockList />
         </div>
       </MobileDrawer>
+
+      {/* ── Onboarding popup ── */}
+      {showOnboarding && <OnboardingPopup onClose={handleCloseOnboarding} />}
     </div>
   );
 }

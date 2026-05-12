@@ -194,7 +194,7 @@ export default function BlockPalette({ userEmail, onLogout, onAfterAdd }) {
               className="
                 hidden md:flex p-1.5 rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100
                 border border-transparent hover:border-gray-200
-                transition-all duration-150
+                transition-all duration-150 relative bottom-2 left-2
               "
             >
               <CollapseIcon />
