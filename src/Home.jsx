@@ -75,7 +75,7 @@ export default function Home({ onLogout }) {
   const [blocksOpen,   setBlocksOpen]   = useState(false)
 
   return (
-    <div className="flex flex-col h-screen bg-[#0a0a0a]">
+    <div className="flex flex-col h-screen ">
       <div className="flex flex-1 min-h-0">
 
         {/* ── Left: Block palette — desktop only ── */}
