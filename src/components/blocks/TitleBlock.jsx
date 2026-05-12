@@ -1,24 +1,35 @@
 export default function TitleBlock({ content, onChange }) {
   return (
-    <div className="space-y-3">
-      <div>
-        <label className="block text-[10px] text-[#555] mb-1 font-mono uppercase tracking-wider">Project name</label>
+    <div className="space-y-4">
+      {/* Project name — large, bold feel */}
+      <div className="space-y-1.5">
+        <label className="block text-[10px] text-gray-500 font-mono uppercase tracking-wider">
+          Project name
+        </label>
         <input
-          className="w-full bg-[#0d0d0d] border border-[#2a2a2a] rounded px-3 py-2 text-[#e8e8e0] font-mono text-sm focus:outline-none focus:border-[#7c6dfa] transition-colors"
+          className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2.5 text-gray-800 text-lg font-semibold
+                     focus:outline-none focus:border-purple-400 focus:ring-1 focus:ring-purple-400/20
+                     placeholder:text-gray-300 transition-colors"
           value={content.name || ''}
-          onChange={e => onChange({ name: e.target.value })}
-          placeholder="My Awesome Project"
+          onChange={(e) => onChange({ name: e.target.value })}
+
         />
       </div>
-      <div>
-        <label className="block text-[10px] text-[#555] mb-1 font-mono uppercase tracking-wider">Tagline</label>
+
+      {/* Tagline */}
+      <div className="space-y-1.5">
+        <label className="block text-[10px] text-gray-500 font-mono uppercase tracking-wider">
+          Tagline
+        </label>
         <input
-          className="w-full bg-[#0d0d0d] border border-[#2a2a2a] rounded px-3 py-2 text-[#e8e8e0] text-sm focus:outline-none focus:border-[#7c6dfa] transition-colors"
+          className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-600 text-sm
+                     focus:outline-none focus:border-purple-400 focus:ring-1 focus:ring-purple-400/20
+                     placeholder:text-gray-400 transition-colors"
           value={content.tagline || ''}
-          onChange={e => onChange({ tagline: e.target.value })}
+          onChange={(e) => onChange({ tagline: e.target.value })}
           placeholder="A short, snappy description"
         />
       </div>
     </div>
-  )
+  );
 }

@@ -1,6 +1,6 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { BLOCK_META, BLOCK_TYPES } from '../../lib/blocks.js';
+import { BLOCK_META, BLOCK_TYPES, BLOCK_ICONS } from '../../lib/blocks.js';
 import useReadme from '../../store/useReadme.js';
 import TitleBlock from '../blocks/TitleBlock.jsx';
 import BadgesBlock from '../blocks/BadgesBlock.jsx';
@@ -37,6 +37,7 @@ export default function BlockItem({ block }) {
 
   const meta = BLOCK_META[block.type];
   const EditorComponent = BLOCK_COMPONENTS[block.type];
+  const IconComponent = BLOCK_ICONS[block.type];
   const isActive = activeBlockId === block.id;
 
   const style = {
@@ -49,15 +50,17 @@ export default function BlockItem({ block }) {
     <div
       ref={setNodeRef}
       style={style}
-      className={`border rounded-[8px] overflow-hidden transition-colors ${
-        isActive
-          ? 'border-[#2a2a2a] bg-[#161616]'
-          : 'border-[#1a1a1a] bg-[#111] hover:border-[#222]'
-      }`}
+      className={`
+        rounded-lg overflow-hidden transition-all duration-200
+        bg-white border border-[#EBEBEB]
+        ${isActive ? 'shadow-sm shadow-black/5' : ''}
+        ${isDragging ? 'shadow-lg shadow-black/10' : 'shadow-none'}
+      `}
     >
       {/* Header row */}
       <div
-        className="flex items-center gap-2 px-3 py-2.5 cursor-pointer select-none"
+        className="flex items-center gap-2 px-3 py-2.5 cursor-pointer select-none
+                   hover:bg-gray-50/80 transition-colors"
         onClick={() => setActiveBlock(isActive ? null : block.id)}
       >
         {/* Drag handle */}
@@ -65,7 +68,7 @@ export default function BlockItem({ block }) {
           {...attributes}
           {...listeners}
           onClick={e => e.stopPropagation()}
-          className="cursor-grab active:cursor-grabbing text hover:text-[#555] px-0.5 transition-colors"
+          className="cursor-grab active:cursor-grabbing text-gray-300 hover:text-gray-500 px-0.5 transition-colors"
           title="Drag to reorder"
         >
           <svg width="10" height="16" viewBox="0 0 10 16" fill="currentColor">
@@ -78,10 +81,19 @@ export default function BlockItem({ block }) {
           </svg>
         </div>
 
-        <span className="text-[15px] ml-1 font-mono w-5 text-center shrink-0" style={{ color: meta?.color }}>
-          {meta?.icon}
+        {/* Lucide icon */}
+        {IconComponent && (
+          <IconComponent
+            size={18}
+            className="shrink-0"
+            style={{ color: meta?.color || '#333' }}
+          />
+        )}
+
+        {/* Title */}
+        <span className="text-[15px] font-medium text-gray-800 flex-1 truncate">
+          {meta?.label}
         </span>
-        <span className="text-[15px] ml-2 font-medium tracking-right text flex-1">{meta?.label}</span>
 
         {/* Duplicate */}
         <button
@@ -89,7 +101,7 @@ export default function BlockItem({ block }) {
             e.stopPropagation();
             duplicateBlock(block.id);
           }}
-          className="text  text-xs transition-colors px-1"
+          className="text-gray-300 hover:text-gray-600 p-1 rounded transition-colors"
           title="Duplicate"
         >
           <Copy size={15} />
@@ -101,14 +113,17 @@ export default function BlockItem({ block }) {
             e.stopPropagation();
             removeBlock(block.id);
           }}
-          className="text text-xs hover:text-[#ff5757] text-base leading-none transition-colors"
+          className="text-gray-300 hover:text-red-400 p-1 rounded transition-colors"
           title="Remove block"
         >
           <Trash size={15} />
         </button>
 
+        {/* Expand arrow */}
         <span
-          className={`text transition-transform duration-200 ${isActive ? 'rotate-180' : ''}`}
+          className={`text-gray-300 transition-transform duration-200 ${
+            isActive ? 'rotate-180' : ''
+          }`}
         >
           <ChevronDown size={15} />
         </span>
@@ -116,7 +131,7 @@ export default function BlockItem({ block }) {
 
       {/* Expanded editor */}
       {isActive && EditorComponent && (
-        <div className="px-3 pb-4 pt-1 border-t border-[#1e1e1e]">
+        <div className="px-3 pb-4 pt-1 border-t border-gray-100 bg-gray-50/30">
           <EditorComponent
             content={block.content}
             onChange={patch => updateBlock(block.id, patch)}

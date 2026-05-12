@@ -1,19 +1,22 @@
-const LANGS = ['js', 'ts', 'jsx', 'tsx', 'py', 'bash', 'go', 'rust', 'php', 'ruby']
+const LANGS = ['js', 'ts', 'jsx', 'tsx', 'py', 'bash', 'go', 'rust', 'php', 'ruby'];
 
 export default function UsageBlock({ content, onChange }) {
   return (
-    <div className="space-y-3">
-      <div>
-        <label className="block text-xs text-[#555] mb-1 font-mono uppercase tracking-wider">Language</label>
-        <div className="flex flex-wrap gap-1">
-          {LANGS.map(l => (
+    <div className="space-y-4">
+      {/* Language selector */}
+      <div className="space-y-1.5">
+        <label className="block text-[10px] text-gray-500 font-mono uppercase tracking-wider">
+          Language
+        </label>
+        <div className="flex flex-wrap gap-1.5">
+          {LANGS.map((l) => (
             <button
               key={l}
               onClick={() => onChange({ language: l })}
-              className={`px-2.5 py-1 text-xs font-mono rounded border transition-colors ${
+              className={`px-2.5 py-1.5 text-xs font-mono rounded-lg border transition-all duration-200 ${
                 content.language === l
-                  ? 'border-[#57ffc8] text-[#57ffc8] bg-[#57ffc8]/10'
-                  : 'border-[#2a2a2a] text-[#555] hover:border-[#3a3a3a] hover:text-[#888]'
+                  ? 'border-emerald-400 text-emerald-600 bg-emerald-50 shadow-sm'
+                  : 'border-gray-200 text-gray-500 hover:border-gray-300 hover:text-gray-700 hover:bg-gray-50'
               }`}
             >
               {l}
@@ -21,17 +24,32 @@ export default function UsageBlock({ content, onChange }) {
           ))}
         </div>
       </div>
-      <div>
-        <label className="block text-xs text-[#555] mb-1 font-mono uppercase tracking-wider">Code</label>
-        <textarea
-          className="w-full bg-[#0d0d0d] border border-[#2a2a2a] rounded px-3 py-2 text-[#a8ff57] font-mono text-xs focus:outline-none focus:border-[#57ffc8] transition-colors resize-none leading-relaxed"
-          rows={8}
-          value={content.code}
-          onChange={e => onChange({ code: e.target.value })}
-          placeholder="// your example code here"
-          spellCheck={false}
-        />
+
+      {/* Code textarea — syntax‑style */}
+      <div className="space-y-1.5">
+        <label className="block text-[10px] text-gray-500 font-mono uppercase tracking-wider">
+          Code
+        </label>
+        <div className="relative">
+          {/* Line numbers gutter (decorative) */}
+          <div className="absolute left-0 top-0 bottom-0 w-8 bg-gray-100 border-r border-gray-200 rounded-l-lg
+                          flex flex-col items-end pr-2 pt-2 text-[10px] font-mono text-gray-300 select-none pointer-events-none">
+            {Array.from({ length: 8 }, (_, i) => (
+              <span key={i} className="leading-[1.625]">{i + 1}</span>
+            ))}
+          </div>
+          <textarea
+            className="w-full bg-gray-50 border border-gray-200 rounded-lg pl-10 pr-3 py-2 text-gray-800 font-mono text-sm
+                       focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400/20
+                       placeholder:text-gray-400 transition-colors resize-none leading-[1.625]"
+            rows={8}
+            value={content.code}
+            onChange={(e) => onChange({ code: e.target.value })}
+            placeholder="// your example code here"
+            spellCheck={false}
+          />
+        </div>
       </div>
     </div>
-  )
+  );
 }

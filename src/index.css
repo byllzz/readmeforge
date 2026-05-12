@@ -5,14 +5,15 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 :root {
-  --bg:        #1F1F1E;
-  /* --bg : #F8F8F6; */
+  /* --bg:        #1F1F1E; */
+  --bg : #F8F8F6;
   --bg2:       #141416;
   --bg3:       #1a1a1e;
   --bg4:       #222228;
   --border:    #2a2a32;
   --border2:   #38383f;
-  --text:      #ffffff;
+  /* --text:      #ffffff; */
+  --text: #000000;
   --text2:     #9090a0;
   --text3:     #58586a;
   --accent:    #7c6dfa;
