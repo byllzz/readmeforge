@@ -5,28 +5,9 @@ import { blocksToMarkdown } from '../../lib/markdown.js'
 import { Check, Code2, Eye, Download, Camera ,FileWarning, CopySlash } from 'lucide-react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { duotoneLight } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import EmptyCanvas from '../ui/EmptyCanvas.jsx'
 
 marked.setOptions({ breaks: true, gfm: true })
-
-/* empty */
-function EmptyPreview() {
-  return (
-    <div className="h-full flex items-center justify-center absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 ">
-      <div className="flex flex-col items-center text-center gap-4 max-w-[240px]">
-        <div className="w-12 h-12 flex items-center justify-center rounded-xl
-                        bg-white/[0.04] border border-white/[0.07]">
-          <span className="text-[24px] leading-none">📄</span>
-        </div>
-        <div className="space-y-1.5">
-          <p className="text-[13px] font-mono font-semibold text tracking-tight">Empty Preview</p>
-          <p className="text-[11px] text leading-relaxed">
-            Add blocks to see your README rendered here
-          </p>
-        </div>
-      </div>
-    </div>
-  )
-}
 
 /*  Stat chips */
 function StatChip({ icon, label }) {
@@ -235,12 +216,12 @@ export default function MarkdownPreview() {
       <div className="flex-1 min-h-full py-0! flex flex-col overflow-hidden bg-white relative">
         {/* Content area */}
         {blocks.length === 0 ? (
-          <EmptyPreview />
+          <EmptyCanvas  />
 
         ) : (
           <div
             className="flex-1 h-full overflow-y-auto"
-            style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(255,255,255,0.07) transparent' }}
+            style={{ scrollbarWidth: 'none', }}
           >
             {/* Screenshot notices */}
             {activeTab === 'preview' && screenshotsBlock && validScreenshots.length === 0 && (
@@ -300,8 +281,8 @@ export default function MarkdownPreview() {
                 <div
                   className="flex-1 overflow-auto relative code-view-wrapper"
                   style={{
-                    scrollbarWidth: 'thin',
-                    scrollbarColor: 'rgba(255,255,255,0.07) transparent',
+                    scrollbarWidth: 'none',
+
                   }}
                 >
                   {/* Line-number gutter matches the background */}
@@ -365,10 +346,10 @@ function PreviewFooter({ raw, kbSize , validScreenshots , wordCount}) {
     <div
       className="border-t border-[#d9d0d0] sticky bottom-0 bg-white px-3 py-2
                     flex items-center justify-between gap-4
-                    text-[10px]  text"
+                    text-[9px] sm:text-[10px]  text font-bold"
     >
       {/* left */}
-      <div className='flex items-center w-full gap-9'>
+      <div className='flex items-center w-full gap-4 sm:gap-9'>
         <div className="flex items-center gap-1.5">
           <svg
             width="12"
@@ -381,7 +362,7 @@ function PreviewFooter({ raw, kbSize , validScreenshots , wordCount}) {
             <circle cx="12" cy="12" r="10" />
             <polyline points="12 6 12 12 16 14" />
           </svg>
-          <span>Updated {new Date().toLocaleTimeString()}</span>
+          <span >Updated {new Date().toLocaleTimeString()}</span>
         </div>
 
         <div className="flex items-center gap-1.5">
@@ -576,19 +557,4 @@ const CODE_VIEW_CSS = `
     transition: color 0.15s;
   }
 
-  /* Light scrollbars for code area */
-  .code-view-wrapper::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-  .code-view-wrapper::-webkit-scrollbar-track {
-    background: #f5f5f5;
-  }
-  .code-view-wrapper::-webkit-scrollbar-thumb {
-    background: #d0d0d0;
-    border-radius: 3px;
-  }
-  .code-view-wrapper::-webkit-scrollbar-thumb:hover {
-    background: #b0b0b0;
-  }
 `;

@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react'
 import BlockPalette from './components/editor/BlockPalette.jsx'
 import SortableBlockList from './components/editor/SortableBlockList.jsx'
 import MarkdownPreview from './components/preview/MarkdownPreview.jsx'
-import OnboardingPopup from './components/OnboardingPopup.jsx'
-import { ChevronDown, Layers, LayoutGrid, X, HelpCircle } from 'lucide-react'
+import OnboardingPopup from './components/ui/OnboardingPopup.jsx'
+import { ChevronDown, Layers, LayoutGrid, X, } from 'lucide-react'
 import useReadme from './store/useReadme.js'
 
-/* ── Mobile Drawer (white version) ── */
+/*  Mobile Drawer  */
 function MobileDrawer({ open, onClose, title, children }) {
   const [everOpened, setEverOpened] = useState(false)
 
@@ -63,7 +63,7 @@ function MobileDrawer({ open, onClose, title, children }) {
   );
 }
 
-/* ── Mobile Bottom Navbar ── */
+/*  Mobile Bottom Navbar  */
 function MobileNavbar({ blocksCount, onBlocksClick, onPaletteClick, activeTab }) {
   return (
     <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 shadow-lg shadow-black/5">
@@ -158,14 +158,14 @@ export default function Home({ onLogout }) {
   return (
     <div className="flex flex-col h-screen ">
       <div className="flex flex-1 min-h-0">
-        {/* ── Left: Block palette — desktop only ── */}
+        {/*  Left: Block palette — desktop only  */}
         <div className="hidden md:flex border-r border-[#d9d0d0]">
           <BlockPalette userEmail={email} onLogout={onLogout} />
         </div>
 
-        {/* ── Center: Sortable editor — desktop only ── */}
+        {/*  Center: Sortable editor — desktop only  */}
         <main className="hidden md:flex w-[41rem] shrink-0 flex-col min-h-0 ">
-          <div className="px-3 pt-3.5 pb-2.5 flex items-center gap-1.5 shrink-0">
+          <div className="px-3 pt-3.5  flex items-center gap-1.5 shrink-0">
             <p className="text-[15px] font-medium text-gray-800">Area contains specific blocks</p>
             <ChevronDown size={16} className="text-gray-400" />
           </div>
@@ -178,7 +178,7 @@ export default function Home({ onLogout }) {
           <div className="absolute top-1/2 -translate-y-1/2 h-[24px] w-2 rounded-full -left-[2.5px] bg-[#aaa] group-hover:bg-blue-500 shadow-2xl z-10" />
         </div>
 
-        {/* ── Right: Live preview ── */}
+        {/*  Right: Live preview  */}
         <div className="flex-1 flex flex-col min-h-0 overflow-hidden bg-white pb-16 md:pb-0">
           <div className="flex-1 overflow-y-auto">
             <MarkdownPreview />
@@ -186,7 +186,7 @@ export default function Home({ onLogout }) {
         </div>
       </div>
 
-      {/* ── "How it works" button (fixed bottom‑right) ── */}
+      {/*  "How it works" button (fixed bottom‑right)  */}
       {/* <button
         onClick={() => setShowOnboarding(true)}
         className="fixed bottom-20 md:bottom-6 right-5 z-30 flex items-center gap-2 px-4 py-2.5 rounded-full
@@ -198,7 +198,7 @@ export default function Home({ onLogout }) {
         <span className="hidden sm:inline">How it works</span>
       </button> */}
 
-      {/* ── Mobile Bottom Navbar ── */}
+      {/*  Mobile Bottom Navbar  */}
       <MobileNavbar
         blocksCount={blocks.length}
         onBlocksClick={handleBlocksClick}
@@ -206,7 +206,7 @@ export default function Home({ onLogout }) {
         activeTab={mobileActiveTab}
       />
 
-      {/* ── Mobile drawers ── */}
+      {/*  Mobile drawers  */}
       <MobileDrawer open={paletteOpen} onClose={handleClosePalette} title="Block palette">
         <div
           style={{ display: 'flex', flexDirection: 'column', height: '100%', overflowY: 'auto' }}
@@ -221,7 +221,7 @@ export default function Home({ onLogout }) {
         </div>
       </MobileDrawer>
 
-      {/* ── Onboarding popup ── */}
+      {/*  Onboarding popup  */}
       {showOnboarding && <OnboardingPopup onClose={handleCloseOnboarding} />}
     </div>
   );

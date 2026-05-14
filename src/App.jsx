@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import Home from './Home';
 import LandingPage from './components/pages/LandingPage';
-import LoadingSpinner from './components/LoadingSpinner';   // adjust path if needed
+import LoadingSpinner from './components/ui/LoadingSpinner';   // adjust path if needed
 
 const ACTIVE_EMAIL_KEY = 'readmeforge_activeEmail';
 

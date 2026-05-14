@@ -10,61 +10,12 @@ import {
 import { useState } from 'react'
 import useReadme from '../../store/useReadme.js'
 import BlockItem from './BlockItem.jsx'
-import { BLOCK_META, BLOCK_ICONS } from '../../lib/blocks.js';
+import { BLOCK_META } from '../../lib/blocks.js';
 import { Edit3 } from 'lucide-react'
+import EmptyCanvas from '../ui/EmptyCanvas.jsx'
+import DragGhost from '../ui/DragGhost.jsx'
 
-function EmptyCanvas() {
-  return (
-    <div className="flex-1 flex items-center justify-center h-full min-h-[400px] select-none">
-      <div className="flex flex-col items-center text-center space-y-5 max-w-[260px] px-4">
-        <div className="relative">
-          <div className="w-14 h-14 flex items-center justify-center rounded-2xl bg-white/[0.04] border border-white/[0.07] shadow-inner">
-            <span className="text-[28px] leading-none">📄</span>
-          </div>
-          <div className="absolute inset-0 rounded-2xl blur-xl bg-white/[0.03] -z-10 scale-150" />
-        </div>
-        <div className="space-y-1.5">
-          <p className="text-[14px] font-mono font-semibold text tracking-tight">Empty canvas</p>
-          <p className="text-[11px] text leading-relaxed">Your README is waiting. Pick a block from the left panel to get started.</p>
-        </div>
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.07]">
-          <div className="w-1 h-1 rounded-full bg-emerald-400/60 animate-pulse" />
-          <span className="text-[10px] font-mono text">click a block to begin</span>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-
-function DragGhost({ block, meta }) {
-  const IconComponent = BLOCK_ICONS[block.type];
-
-  return (
-    <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-white border border-gray-200 shadow-2xl shadow-black/20 min-w-[260px] max-w-[320px] rotate-[1deg] scale-[1.03]">
-      <div className="w-8 h-8 flex-shrink-0 flex items-center justify-center rounded-lg bg-gray-100 border border-gray-200">
-        {IconComponent ? (
-          <IconComponent size={18} style={{ color: meta?.color }} />
-        ) : (
-          <span className="text-[17px] leading-none">❓</span>
-        )}
-      </div>
-      <div className="flex flex-col min-w-0 flex-1">
-        <span className="text-[13px] font-medium text-gray-800 leading-tight truncate">
-          {meta.label}
-        </span>
-        <span className="text-[10px] text-gray-400 truncate mt-0.5">Drag to reorder</span>
-      </div>
-      <div className="flex-shrink-0 px-1.5 py-0.5 rounded-md bg-gray-100 border border-gray-200">
-        <span className="text-[9px] font-mono text-gray-500 uppercase tracking-wide">moving</span>
-      </div>
-    </div>
-  );
-}
-
-
-// Pure content component — no mobile FAB or drawer logic.
-// Home.jsx owns all mobile behavior.
+// main component::
 export default function SortableBlockList() {
   const { blocks, reorderBlocks } = useReadme()
   const [activeId,   setActiveId]   = useState(null)
@@ -100,12 +51,12 @@ export default function SortableBlockList() {
       <SortableContext items={blocks.map(b => b.id)} strategy={verticalListSortingStrategy}>
         <div
           className="h-full flex flex-col overflow-y-auto"
-          style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(255,255,255,0.07) transparent' }}
+          style={{  scrollbarWidth: "none"  }}
         >
           {/* Header */}
-          <div className="sticky top-0 z-10 w-full  border-b border-white/[0.05] px-4 py-2.5 flex-shrink-0 ">
+          <div className="sticky top-0 z-10 w-full bg-(--bg)  border-b border-white/[0.05] px-4 py-2.5 flex-shrink-0 ">
             <div className="flex items-center justify-between w-full">
-              <span className="text-[10px] font-medium uppercase tracking-wide text">
+              <span className="text-[9px] sm:text-[10px] font-medium uppercase tracking-wide text">
                 Drag to reorder your README
               </span>
               <div className="flex items-center gap-2">
@@ -123,7 +74,7 @@ export default function SortableBlockList() {
                     <rect x="3" y="14" width="7" height="7" rx="1" />
                     <rect x="14" y="14" width="7" height="7" rx="1" />
                   </svg>
-                  <span className="text-[12px]">
+                  <span className="text-[10px] sm:text-[12px]">
                     {blocks.length} {blocks.length === 1 ? 'block' : 'blocks'}
                   </span>
                 </div>
@@ -136,7 +87,7 @@ export default function SortableBlockList() {
                   }}
                 >
                   <div className="w-1.5 h-1.5 rounded-full bg-amber-400/70 animate-pulse" />
-                  <span className="text-[12px] text-amber-400/70">reordering</span>
+                  <span className="text-[10px] sm:text-[12px] text-amber-400/70">reordering</span>
                 </div>
               </div>
             </div>
@@ -154,7 +105,7 @@ export default function SortableBlockList() {
           </div>
 
           {/* Footer hint */}
-          <div className="sticky bottom-0 flex-shrink-0  pt-6 pb-3 px-4 pointer-events-none">
+          <div className="sticky bottom-0 flex-shrink-0 bg-(--bg)  pt-2 pb-2 px-4 pointer-events-none">
             <div className="flex items-center justify-center gap-4 text-[9px] text font-bold">
               <div className="flex items-center gap-1">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
