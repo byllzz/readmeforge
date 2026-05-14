@@ -83,17 +83,11 @@ export default function BlockItem({ block }) {
 
         {/* Lucide icon */}
         {IconComponent && (
-          <IconComponent
-            size={18}
-            className="shrink-0"
-            style={{ color: meta?.color || '#333' }}
-          />
+          <IconComponent size={18} className="shrink-0" style={{ color: meta?.color || '#333' }} />
         )}
 
         {/* Title */}
-        <span className="text-[15px] font-medium text-gray-800 flex-1 truncate">
-          {meta?.label}
-        </span>
+        <span className="text-[15px] font-medium text-gray-800 flex-1 truncate">{meta?.label}</span>
 
         {/* Duplicate */}
         <button

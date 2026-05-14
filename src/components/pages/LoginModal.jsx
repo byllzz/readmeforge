@@ -55,9 +55,9 @@ export default function LoginModal({ onLogin, onClose, inline = false, inputRef 
                 setError('');
               }}
               placeholder="you@example.com"
-              className="w-full rounded-xl font-outfit bg-gray-50 border border-gray-200 pl-10 pr-4 py-2.5 text-sm text-gray-900
+              className="w-full rounded-xl! font-outfit bg-gray-50 border border-gray-200 pl-10 pr-4 py-2.5 text-sm text-gray-900
                          placeholder:text-gray-400
-                         focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-400/10 focus:bg-white
+                         focus:outline-none focus:border-violet-900! focus:ring-2 focus:ring-violet-500 focus:bg-white
                          transition-all duration-200"
             />
           </div>

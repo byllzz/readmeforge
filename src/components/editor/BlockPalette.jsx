@@ -39,9 +39,9 @@ function BlockList({ addBlock, onAfterAdd }) {
               onAfterAdd?.();
             }}
             className="
-              group w-full flex items-center gap-2 px-3 py-2 rounded-lg text-left
-              bg-transparent hover:bg-gray-100
-              border border-transparent hover:border-gray-200
+              group w-full flex items-center gap-2 px-3 py-1  text-left
+              bg-transparent hover:bg-gray-200!
+              border border-transparent hover:border-gray-200!
               transition-all duration-150
               focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-300
             "
@@ -49,11 +49,10 @@ function BlockList({ addBlock, onAfterAdd }) {
             {/* Icon box */}
             <div className="
               w-8 h-8 flex-shrink-0 flex items-center justify-center rounded-md
-              bg-gray-50 group-hover:bg-white
-              border border-gray-100 group-hover:border-gray-200
+              group-hover:border-gray-200
               transition-all duration-150
             ">
-              {IconComponent && <IconComponent size={18} style={{ color: meta.color }} />}
+              {IconComponent && <IconComponent size={17} style={{ color: '#000' }} />}
             </div>
 
             {/* Label */}
@@ -63,7 +62,7 @@ function BlockList({ addBlock, onAfterAdd }) {
 
             {/* “+” indicator */}
             <span className="
-              ml-auto flex-shrink-0 text-gray-300
+              ml-auto flex-shrink-0 text
               opacity-0 group-hover:opacity-100
               translate-x-1 group-hover:translate-x-0
               transition-all duration-150
@@ -109,7 +108,7 @@ export default function BlockPalette({ userEmail, onLogout, onAfterAdd }) {
   return (
     <aside
       className={`
-        flex flex-col flex-shrink-0 h-full bg-white
+        flex flex-col flex-shrink-0 h-full
         transition-[width] duration-300 ease-in-out overflow-hidden
         ${isMinimized ? 'w-[52px]' : 'w-full md:w-[286px]'}
       `}
@@ -117,14 +116,14 @@ export default function BlockPalette({ userEmail, onLogout, onAfterAdd }) {
       {isMinimized ? (
         /* Collapsed icon rail */
         <div
-          className="flex flex-col items-center py-3 gap-[3px] h-full overflow-y-auto bg-white"
+          className="flex flex-col items-center py-3 gap-[3px] h-full overflow-y-auto "
           style={{ scrollbarWidth: 'none' }}
         >
           <button
             onClick={() => setIsMinimized(false)}
             title="Expand sidebar"
             className="
-              w-9 h-9 mb-2 flex items-center justify-center rounded-md
+              w-9 h-9 flex items-center justify-center rounded-md
               text-gray-400 hover:text-gray-700 hover:bg-gray-100
               border border-transparent hover:border-gray-200
               transition-all duration-150
@@ -153,7 +152,7 @@ export default function BlockPalette({ userEmail, onLogout, onAfterAdd }) {
                       transition-all duration-150
                     "
                   >
-                    {IconComponent && <IconComponent size={18} style={{ color: meta.color }} />}
+                    {IconComponent && <IconComponent size={18} style={{ color:"#000" }} />}
                   </button>
                   {/* Tooltip */}
                   <div className="

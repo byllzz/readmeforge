@@ -1,5 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import LoginModal from './LoginModal';
+import LandingPricing from './LandingPricing';
+import LandingFAQ from './LandingFAQ';
+import LandingFooter from './LandingFooter';
+import LandingNavbar from './LandingNavbar';
+import {ReadmeForgeLogo} from './LandingIcons'
 
 function useTypingEffect(phrases, { typeSpeed = 60, deleteSpeed = 35, pauseMs = 2000 } = {}) {
   const [displayed, setDisplayed] = useState('');
@@ -32,40 +37,6 @@ function useTypingEffect(phrases, { typeSpeed = 60, deleteSpeed = 35, pauseMs = 
   return displayed;
 }
 
-function PillNav({ onSignIn }) {
-  return (
-    <div className="fixed top-2 w-full max-w-[1400px] left-1/2 -translate-x-1/2  flex justify-center z-50 px-4">
-      <nav className="flex items-center justify-between gap-1 px-2 py-2 w-full">
-        <div className="flex items-center gap-2 px-5 py-1">
-          {/* <span className="text-lg leading-none bg-blue-500 p-3 px-2.5 rounded-[8px]">📄</span> */}
-          <span className="font-medium text-[20px] tracking-tight text-gray-900">ReadmeForge</span>
-        </div>
-
-        <div className="w-px h-4 bg-black/10 mx-1" />
-
-        {/* {['Features', 'Pricing', 'Docs'].map(link => (
-          <a
-            key={link}
-            href="#"
-            className="hidden sm:block px-3 py-1.5 rounded-full text-xs font-medium text-gray-500 hover:text-gray-900 hover:bg-black/[0.05] transition-all duration-150"
-            style={{ fontFamily: 'sans-serif' }}
-          >
-            {link}
-          </a>
-        ))} */}
-
-        <div className="hidden sm:block w-px h-4 bg-black/10 mx-1" />
-
-        <button
-          onClick={onSignIn}
-          className="px-4 py-2.5 rounded-[5px]  text text-xs font-semibold hover:bg-gray-700 active:scale-95 transition-all duration-150"
-        >
-          Sign in
-        </button>
-      </nav>
-    </div>
-  );
-}
 
 function SplitHero({ onLogin, inputRef }) {
   const phrases = [
@@ -79,7 +50,7 @@ function SplitHero({ onLogin, inputRef }) {
   const typed = useTypingEffect(phrases, { typeSpeed: 55, deleteSpeed: 30, pauseMs: 2200 });
 
   return (
-    <section className="min-h-screen grid grid-cols-1 md:grid-cols-2 relative overflow-hidden bg-[#F8F8F6]">
+    <section className="min-h-screen grid grid-cols-1  md:grid-cols-2 relative overflow-hidden  w-full mx-auto max-w-[1300px]">
       <div
         className="absolute inset-0 pointer-events-none opacity-30"
         style={{
@@ -90,7 +61,6 @@ function SplitHero({ onLogin, inputRef }) {
         }}
       />
 
-      <div className="hidden md:block absolute top-0 bottom-0 left-1/2 w-px bg-black/[0.07] pointer-events-none" />
 
       <div className="relative z-10 flex flex-col items-center justify-center px-6 sm:px-10 md:px-16 pt-28 pb-10 md:py-28 top-10">
         <div className="w-full max-w-[340px]">
@@ -103,17 +73,19 @@ function SplitHero({ onLogin, inputRef }) {
             build faster
           </h1>
           <p className="text-sm text-gray-400 mb-3 leading-relaxed text-center">
-            Build beautiful docs with zero effort
+            Build beautiful README.md docs with zero effort
           </p>
 
           <LoginModal inline inputRef={inputRef} onLogin={onLogin} onClose={() => {}} />
         </div>
       </div>
 
-      <div className="relative top-6 z-10 flex flex-col justify-center items-center px-6 sm:px-10 md:px-16 pb-20 md:py-28 w-full">
-        <p className="text-[11px] text uppercase relative top-15 font-bold">ReadmeForge</p>
+      <div className="relative z-10 flex flex-col justify-center items-center px-6 sm:px-10 md:px-16 pb-20 md:py-28 w-full">
+        <p className="text-[14px] flex items-center gap-2 text uppercase relative top-15 font-bold">
+         <ReadmeForgeLogo />
+          ReadmeForge</p>
 
-        <div className="min-h-[200px] md:min-h-[260px] flex items-start relative top-20">
+        <div className="min-h-[200px] md:min-h-[260px] flex items-start relative top-19">
           <h2
             style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
             className="text-[clamp(36px,4.8vw,60px)] font-normal text-center leading-[1.12] tracking-[-0.03em] text-gray-900 m-0 whitespace-pre-line"
@@ -164,8 +136,12 @@ export default function LandingPage({ onLogin }) {
 
   return (
     <div className="min-h-screen antialiased">
-      <PillNav onSignIn={handleSignIn} />
+      {/* <PillNav onSignIn={handleSignIn} /> */}
+      <LandingNavbar onSignIn={handleSignIn} />
       <SplitHero onLogin={onLogin} inputRef={inputRef} />
+      <LandingPricing />
+      <LandingFAQ />
+      <LandingFooter />
     </div>
   );
 }

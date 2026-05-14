@@ -103,13 +103,13 @@ export default function SortableBlockList() {
           style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(255,255,255,0.07) transparent' }}
         >
           {/* Header */}
-          <div className="sticky top-0 z-10 w-full  border-b border-white/[0.05] px-4 py-2.5 flex-shrink-0 bg-white">
+          <div className="sticky top-0 z-10 w-full  border-b border-white/[0.05] px-4 py-2.5 flex-shrink-0 ">
             <div className="flex items-center justify-between w-full">
               <span className="text-[10px] font-medium uppercase tracking-wide text">
                 Drag to reorder your README
               </span>
               <div className="flex items-center gap-2">
-                <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-[#EFEEEB] text-black font-medium">
+                <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-white text-black font-medium">
                   <svg
                     width="13"
                     height="13"
@@ -155,8 +155,8 @@ export default function SortableBlockList() {
 
           {/* Footer hint */}
           <div className="sticky bottom-0 flex-shrink-0  pt-6 pb-3 px-4 pointer-events-none">
-            <div className="flex items-center justify-center gap-4 text-[9px] font-mono text">
-              <div className="flex items-center gap-1.5">
+            <div className="flex items-center justify-center gap-4 text-[9px] text font-bold">
+              <div className="flex items-center gap-1">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                   <circle cx="9" cy="8" r="2" />
                   <circle cx="15" cy="8" r="2" />
@@ -166,7 +166,7 @@ export default function SortableBlockList() {
                 <span>drag to reorder</span>
               </div>
               <div className="w-px h-3 bg-white/[0.08]" />
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1">
                 <Edit3 size={10} />
                 <span>click to edit</span>
               </div>

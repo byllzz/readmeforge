@@ -156,7 +156,7 @@ export default function Home({ onLogout }) {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-white">
+    <div className="flex flex-col h-screen ">
       <div className="flex flex-1 min-h-0">
         {/* ── Left: Block palette — desktop only ── */}
         <div className="hidden md:flex border-r border-[#d9d0d0]">
@@ -164,12 +164,12 @@ export default function Home({ onLogout }) {
         </div>
 
         {/* ── Center: Sortable editor — desktop only ── */}
-        <main className="hidden md:flex w-[41rem] shrink-0 flex-col min-h-0 bg-white">
+        <main className="hidden md:flex w-[41rem] shrink-0 flex-col min-h-0 ">
           <div className="px-3 pt-3.5 pb-2.5 flex items-center gap-1.5 shrink-0">
             <p className="text-[15px] font-medium text-gray-800">Area contains specific blocks</p>
             <ChevronDown size={16} className="text-gray-400" />
           </div>
-          <div className="flex-1 overflow-y-auto bg-white">
+          <div className="flex-1 overflow-y-auto ">
             <SortableBlockList />
           </div>
         </main>
