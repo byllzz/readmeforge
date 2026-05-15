@@ -17,7 +17,7 @@ export default function LoginModal({ onLogin, onClose, inline = false, inputRef 
 
   const card = (
     <div className="w-full max-w-md rounded-2xl bg-white border border-gray-200 p-6 shadow-2xl shadow-gray-900/10 font-outfit!">
-      {/* Header — only show close button when used as overlay */}
+      {/* Header - only show close button when used as overlay */}
       {!inline && (
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">

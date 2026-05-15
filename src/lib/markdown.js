@@ -4,7 +4,7 @@ export function blocksToMarkdown(blocks) {
   const result = blocks
     .map(b => blockToMd(b.type, b.content))
     .filter(Boolean)
-    .join('\n\n');      // ← single blank line between blocks
+    .join('\n\n');      //  single blank line between blocks
   return result;
 }
 

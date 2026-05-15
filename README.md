@@ -37,35 +37,36 @@ No sign‑up. No server. No tracking. Your data is saved **locally in your brows
 
 ##  Features
 
-**Core editor**
+**Core editor** <br>
 ✔️ **11 block types** - Title, Badges, Description, Features, Installation, Usage, Screenshots, API, Contributing, License, Custom Markdown<br>
 ✔️ **Drag‑and‑drop reordering** - powered by `@dnd-kit`, with smooth sorting animations and a drag‑ghost preview<br>
 ✔️ **Collapsible sidebar** - expand to browse blocks with Lucide icons, collapse to a slim icon rail for maximum screen real estate<br>
 ✔️ **Duplicate & remove** - right inside the block header<br>
 
-**Live preview & code view**
+**Live preview & code view** <br>
 ✔️ **Real‑time markdown rendering** - parsed by `marked`, custom renderer for images, badges, and error states<br>
 ✔️ **Syntax‑highlighted code view** - `react-syntax-highlighter` with Prism, duotone‑light theme, line numbers, and forced word‑wrap<br>
 ✔️ **Tab switcher** - toggle between Preview and Code with a single click<br>
-**Export & sharing**
+
+**Export & sharing** <br>
 ✔️ **Copy raw markdown** - one‑click to clipboard<br>
 ✔️ **Download as `README.md`** - instant file download with proper `.md` extension<br>
 ✔️ **Live stats** - word count, file size (KB), and image count updated in real time<br>
 
-**Screenshots block**
+**Screenshots block** <br>
 ✔️ **Upload from device** - drag‑and‑drop or click to select; images converted to base64 for persistent local storage<br>
 ✔️ **Paste from clipboard** - Ctrl+V any image directly into a screenshot entry<br>
 ✔️ **URL input** - paste remote image URLs; live badge preview for shields.io badges<br>
 ✔️ **Alt text & captions** - accessibility‑friendly with optional captions<br>
 ✔️ **Reorder & replace** - move screenshots up/down, replace with a new file<br>
 
-**Data & persistence**
+**Data & persistence** <br>
 ✔️ **Email‑based workspaces** - enter any email to save your README blocks; switch emails for different projects<br>
 ✔️ **`localStorage` persistence** - Zustand with `persist` middleware, keyed per email<br>
 ✔️ **No backend** - everything stays on your device, completely private<br>
 ✔️ **Base64 images** - uploaded screenshots are stored inline, surviving page refreshes<br>
 
-**UX & accessibility**
+**UX & accessibility** <br>
 ✔️ **Onboarding popup** - 5‑step walkthrough shown once per browser session (re‑openable via a fixed "How it works" button)<br>
 ✔️ **Mobile‑responsive** - bottom navbar on small screens with Blocks & Palette tabs; slide‑in drawers for mobile editing<br>
 ✔️ **Resizable panels** - thin draggable divider between the editor and preview on desktop<br>
@@ -74,16 +75,49 @@ No sign‑up. No server. No tracking. Your data is saved **locally in your brows
 
 ---
 
-##  Tech Stack
 
-- [**React**](https://react.dev/) + [**Vite**](https://vitejs.dev/) - component architecture and build tooling
-- [**Tailwind CSS**](https://tailwindcss.com/) - utility‑first styling, fully white/light theme
-- [**Zustand**](https://docs.pmnd.rs/zustand) - lightweight state management with `persist` middleware
-- [**@dnd‑kit**](https://dndkit.com/) - accessible drag‑and‑drop for block reordering
-- [**react‑syntax‑highlighter**](https://github.com/react-syntax-highlighter/react-syntax-highlighter) - Prism‑powered code highlighting
-- [**marked**](https://marked.js.org/) - markdown parsing with custom renderers
-- [**Lucide React**](https://lucide.dev/) - consistent, beautiful icon set
-- [**Vercel**](https://vercel.com) - deployment and hosting
+# Usage
+
+1. Enter any email on the landing page - your workspace is created instantly.
+2. Browse the **Blocks** panel on the left - click any block to add it to your README.
+3. Drag blocks to reorder them in the center panel. Humanity really looked at sticky notes and thought, “what if software.”
+4. Click a block header to expand its editor and fill in your content.
+5. The right panel shows a live preview of your README - switch to **Code View** to see raw Markdown.
+6. Use the **Copy** and **Download** buttons in the toolbar to export your README.
+7. Upload screenshots via drag-and-drop or file picker - URLs are filled automatically.
+8. Click **"How it works"** (fixed button, bottom-right) to replay the onboarding walkthrough. Because apparently we now need tutorials for tutorials.
+9. On mobile, use the bottom navbar to access **Blocks** and **Palette** drawers.
+
+---
+
+#  Block Types
+
+| Block | Icon | Description |
+|---|---|---|
+| Title | Heading | Project name & tagline |
+| Badges | ShieldCheck | shields.io badges with live preview |
+| Description | AlignLeft | Long-form project overview |
+| Features | Star | Bulleted feature list |
+| Installation | Download | Package manager selector + commands |
+| Usage | Play | Language selector + code editor |
+| Screenshots | Image | Upload, URL, captions, reorder |
+| API Docs | Braces | Function signature, description, params |
+| Contributing | GitPullRequest | Intro text + numbered steps |
+| License | Scale | License type, year, author |
+| Custom | Code | Free-form markdown textarea |
+
+---
+
+#  How Data Is Stored
+
+| Setting | Description |
+|---|---|
+| Workspace key | `readmeforge:{email}:blocks` in `localStorage` |
+| Active email | Stored in `localStorage` under `readmeforge_activeEmail` |
+| Images | Converted to base64 Data URLs and saved inline with block content |
+| Onboarding | `sessionStorage` - shown once per browser session |
+| Clear data | Clear `localStorage` keys or switch to a different email |
+
 
 ---
 
@@ -139,49 +173,16 @@ readmeforge/
 ├── tailwind.config.js
 └── README.md
 ```
+##  Tech Stack
 
-# Usage
-
-1. Enter any email on the landing page - your workspace is created instantly.
-2. Browse the **Blocks** panel on the left - click any block to add it to your README.
-3. Drag blocks to reorder them in the center panel. Humanity really looked at sticky notes and thought, “what if software.”
-4. Click a block header to expand its editor and fill in your content.
-5. The right panel shows a live preview of your README - switch to **Code View** to see raw Markdown.
-6. Use the **Copy** and **Download** buttons in the toolbar to export your README.
-7. Upload screenshots via drag-and-drop or file picker - URLs are filled automatically.
-8. Click **"How it works"** (fixed button, bottom-right) to replay the onboarding walkthrough. Because apparently we now need tutorials for tutorials.
-9. On mobile, use the bottom navbar to access **Blocks** and **Palette** drawers.
-
----
-
-#  Block Types
-
-| Block | Icon | Description |
-|---|---|---|
-| Title | Heading | Project name & tagline |
-| Badges | ShieldCheck | shields.io badges with live preview |
-| Description | AlignLeft | Long-form project overview |
-| Features | Star | Bulleted feature list |
-| Installation | Download | Package manager selector + commands |
-| Usage | Play | Language selector + code editor |
-| Screenshots | Image | Upload, URL, captions, reorder |
-| API Docs | Braces | Function signature, description, params |
-| Contributing | GitPullRequest | Intro text + numbered steps |
-| License | Scale | License type, year, author |
-| Custom | Code | Free-form markdown textarea |
-
----
-
-#  How Data Is Stored
-
-| Setting | Description |
-|---|---|
-| Workspace key | `readmeforge:{email}:blocks` in `localStorage` |
-| Active email | Stored in `localStorage` under `readmeforge_activeEmail` |
-| Images | Converted to base64 Data URLs and saved inline with block content |
-| Onboarding | `sessionStorage` - shown once per browser session |
-| Clear data | Clear `localStorage` keys or switch to a different email |
-
+- [**React**](https://react.dev/) + [**Vite**](https://vitejs.dev/) - component architecture and build tooling
+- [**Tailwind CSS**](https://tailwindcss.com/) - utility‑first styling, fully white/light theme
+- [**Zustand**](https://docs.pmnd.rs/zustand) - lightweight state management with `persist` middleware
+- [**@dnd‑kit**](https://dndkit.com/) - accessible drag‑and‑drop for block reordering
+- [**react‑syntax‑highlighter**](https://github.com/react-syntax-highlighter/react-syntax-highlighter) - Prism‑powered code highlighting
+- [**marked**](https://marked.js.org/) - markdown parsing with custom renderers
+- [**Lucide React**](https://lucide.dev/) - consistent, beautiful icon set
+- [**Vercel**](https://vercel.com) - deployment and hosting
 ---
 
 ##  Getting Started

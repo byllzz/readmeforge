@@ -15,7 +15,7 @@ const useReadme = create(
       addBlock: (type) =>
         set((s) => ({ blocks: [...s.blocks, createBlock(type)] })),
 
-      removeBlock: (id) =>
+      removeBlock: (id) => 
         set((s) => ({
           blocks: s.blocks.filter((b) => b.id !== id),
           activeBlockId: s.activeBlockId === id ? null : s.activeBlockId,

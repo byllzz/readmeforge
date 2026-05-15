@@ -17,7 +17,7 @@ export const BLOCK_TYPES = {
   CUSTOM:       'custom',
 }
 
-// No more 'description' field – icon + label + color only
+//  'description' field - icon + label + color only
 export const BLOCK_META = {
   [BLOCK_TYPES.TITLE]:        { label: 'Title',        color: '#7c6dfa' },
   [BLOCK_TYPES.BADGES]:       { label: 'Badges',       color: '#4ade80' },

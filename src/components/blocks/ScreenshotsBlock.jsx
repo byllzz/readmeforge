@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function ScreenshotsBlock({ content, onChange }) {
   const items = content.items || [];
@@ -248,7 +248,7 @@ export default function ScreenshotsBlock({ content, onChange }) {
                         <span className="text-xs text-gray-500">Failed to load image</span>
                         <button
                           onClick={() => triggerFileInput(i)}
-                          className="mt-2 text-[10px] text-amber-500 hover:underline"
+                          className="mt-2 text-[10px] text-amber-500! hover:underline!"
                         >
                           Upload again
                         </button>
@@ -269,7 +269,7 @@ export default function ScreenshotsBlock({ content, onChange }) {
                     <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                       <button
                         onClick={() => window.open(imageSrc, '_blank')}
-                        className="p-1.5 bg-white/80 hover:bg-white rounded shadow-sm transition-colors"
+                        className="p-1.5 bg-white/80! hover:bg-white! rounded shadow-sm transition-colors"
                         title="Open in new tab"
                       >
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-600">
@@ -280,7 +280,7 @@ export default function ScreenshotsBlock({ content, onChange }) {
                       </button>
                       <button
                         onClick={() => triggerFileInput(i)}
-                        className="p-1.5 bg-white/80 hover:bg-white rounded shadow-sm transition-colors"
+                        className="p-1.5 bg-white/80! hover:bg-white! rounded shadow-sm transition-colors"
                         title="Replace image"
                       >
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-600">
@@ -331,7 +331,7 @@ export default function ScreenshotsBlock({ content, onChange }) {
                         onClick={() => moveUp(i)}
                         disabled={i === 0}
                         className={`p-1 rounded transition-colors ${
-                          i === 0 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-500 hover:text-amber-500 hover:bg-gray-100'
+                          i === 0 ? 'text-gray-300! cursor-not-allowed' : 'text-gray-500! hover:text-amber-500! hover:bg-gray-100!'
                         }`}
                         title="Move up"
                       >
@@ -343,7 +343,7 @@ export default function ScreenshotsBlock({ content, onChange }) {
                         onClick={() => moveDown(i)}
                         disabled={i === items.length - 1}
                         className={`p-1 rounded transition-colors ${
-                          i === items.length - 1 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-500 hover:text-amber-500 hover:bg-gray-100'
+                          i === items.length - 1 ? 'text-gray-300! cursor-not-allowed' : 'text-gray-500 hover:text-amber-500! hover:bg-gray-100!'
                         }`}
                         title="Move down"
                       >
@@ -353,7 +353,7 @@ export default function ScreenshotsBlock({ content, onChange }) {
                       </button>
                       <button
                         onClick={() => remove(i)}
-                        className="p-1 rounded text-gray-500 hover:text-red-500 hover:bg-red-50 transition-colors"
+                        className="p-1 rounded text-gray-500! hover:text-red-500! hover:bg-red-50! transition-colors"
                         title="Remove"
                       >
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -368,7 +368,7 @@ export default function ScreenshotsBlock({ content, onChange }) {
                   <div className="flex gap-2">
                     <button
                       onClick={() => triggerFileInput(i)}
-                      className="flex-1 bg-gray-100 hover:bg-gray-200 border border-gray-200 hover:border-amber-400 rounded px-3 py-1.5 text-[11px] font-mono text-gray-600 hover:text-amber-600 transition-all duration-200 flex items-center justify-center gap-2"
+                      className="flex-1 bg-gray-100! hover:bg-gray-200! border! border-gray-200! hover:border-amber-400! rounded px-3 py-1.5 text-[11px] font-mono text-gray-600! hover:text-amber-600! transition-all duration-200 flex items-center justify-center gap-2"
                     >
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -379,7 +379,7 @@ export default function ScreenshotsBlock({ content, onChange }) {
                     </button>
                     <div className="relative flex-1">
                       <input
-                        className="w-full bg-white border border-gray-200 rounded px-3 py-1.5 text-gray-800 text-xs focus:outline-none focus:border-amber-400 transition-colors placeholder:text-gray-300"
+                        className="w-full bg-white! border! border-gray-200! rounded px-3 py-1.5 text-gray-800! text-xs focus:outline-none focus:border-amber-400! transition-colors placeholder:text-gray-300"
                         value={item.url || ''}
                         onChange={e => update(i, 'url', e.target.value)}
                         placeholder="Or paste image URL"
@@ -392,7 +392,7 @@ export default function ScreenshotsBlock({ content, onChange }) {
                   <div className="space-y-1">
                     <label className="text-[10px] font-mono text-gray-500 uppercase tracking-wider">Alt Text</label>
                     <input
-                      className="w-full bg-white border border-gray-200 rounded px-3 py-2 text-gray-800 text-sm focus:outline-none focus:border-amber-400 transition-colors placeholder:text-gray-300"
+                      className="w-full bg-white! border! border-gray-200! rounded px-3 py-2 text-gray-800! text-sm focus:outline-none focus:border-amber-400! transition-colors placeholder:text-gray-300"
                       value={item.alt || ''}
                       onChange={e => update(i, 'alt', e.target.value)}
                       placeholder="Describe the screenshot for accessibility"
@@ -403,7 +403,7 @@ export default function ScreenshotsBlock({ content, onChange }) {
                   <div className="space-y-1">
                     <label className="text-[10px] font-mono text-gray-500 uppercase tracking-wider">Caption (Optional)</label>
                     <textarea
-                      className="w-full bg-white border border-gray-200 rounded px-3 py-2 text-gray-800 text-sm focus:outline-none focus:border-amber-400 transition-colors placeholder:text-gray-300 resize-none"
+                      className="w-full bg-white! border! border-gray-200! rounded px-3 py-2 text-gray-800! text-sm focus:outline-none focus:border-amber-400! transition-colors placeholder:text-gray-300 resize-none"
                       value={item.caption || ''}
                       onChange={e => update(i, 'caption', e.target.value)}
                       placeholder="Add a descriptive caption..."
@@ -420,7 +420,7 @@ export default function ScreenshotsBlock({ content, onChange }) {
       {/* Add button */}
       <button
         onClick={add}
-        className="w-full border-2 border-dashed border-gray-200 hover:border-amber-400 bg-gray-50 hover:bg-gray-100 text-gray-500 hover:text-amber-600 text-sm font-mono py-3 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 group"
+        className="w-full border-2! border-dashed border-gray-200! hover:border-amber-400! bg-gray-50! hover:bg-gray-100! text-gray-500! hover:text-amber-600! text-sm  py-3 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 group"
       >
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="group-hover:rotate-90 transition-transform duration-200">
           <line x1="12" y1="5" x2="12" y2="19" />
@@ -430,10 +430,10 @@ export default function ScreenshotsBlock({ content, onChange }) {
       </button>
 
       {/* Footer tips */}
-      <div className="text-[10px] font-mono text-gray-400 text-center px-2 py-1 bg-gray-50 rounded border border-gray-100 space-y-1">
+      <div className="text-[10px]  text text-center px-2 py-1 bg-gray-50 rounded border border-gray-100 space-y-1">
         <div>💡 Tip: Drag screenshots to reorder • Click to upload images from device</div>
-        <div className="text-[9px] text-gray-300">📋 You can also paste images (Ctrl+V) or drag & drop files</div>
-        <div className="text-[9px] text-amber-500/70">🔗 Remote URLs work best for persistent previews</div>
+        <div className="text-[9px] text">📋 You can also paste images (Ctrl+V) or drag & drop files</div>
+        <div className="text-[9px] font-bold text-amber-500/70">🔗 Remote URLs work best for persistent previews</div>
       </div>
     </div>
   );

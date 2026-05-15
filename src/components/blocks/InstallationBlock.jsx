@@ -13,10 +13,10 @@ export default function InstallationBlock({ content, onChange }) {
             <button
               key={m}
               onClick={() => onChange({ manager: m })}
-              className={`px-3 py-1.5 text-xs font-mono rounded-lg border transition-all duration-200 ${
+              className={`px-3 py-1.5 text-xs font-mono rounded-lg border! transition-all duration-200 ${
                 content.manager === m
-                  ? 'border-red-400 text-red-600 bg-red-50 shadow-sm'
-                  : 'border-gray-200 text-gray-500 hover:border-gray-300 hover:text-gray-700 hover:bg-gray-50'
+                  ? 'border-red-400! text-red-600! bg-red-50! shadow-sm'
+                  : 'border-gray-200! text-gray-500! hover:border-gray-300! hover:text-gray-700! hover:bg-gray-50!'
               }`}
             >
               {m}
@@ -35,9 +35,9 @@ export default function InstallationBlock({ content, onChange }) {
             $
           </span>
           <input
-            className="w-full bg-gray-50 border border-gray-200 rounded-lg pl-7 pr-3 py-2 text-gray-800 font-mono text-sm
-                       focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400/20
-                       placeholder:text-gray-400 transition-colors"
+            className="w-full bg-gray-50 border! border-gray-200! rounded-lg pl-7 pr-3 py-2 text-gray-800! font-mono text-sm
+                       focus:outline-none focus:border-red-400! focus:ring-1 focus:ring-red-400/20!
+                       placeholder:text-gray-400! transition-colors"
             value={content.package}
             onChange={e => onChange({ package: e.target.value })}
             placeholder="your-package-name"
@@ -51,9 +51,9 @@ export default function InstallationBlock({ content, onChange }) {
           Extra commands <span className="text-gray-300 normal-case">(optional)</span>
         </label>
         <textarea
-          className="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-gray-600 font-mono text-sm
-                     focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400/20
-                     placeholder:text-gray-400 transition-colors resize-none"
+          className="w-full bg-gray-50 border! border-gray-200! rounded-lg px-3 py-2 text-gray-600! font-mono text-sm
+                     focus:outline-none focus:border-red-400! focus:ring-1 focus:ring-red-400/20!
+                     placeholder:text-gray-400! transition-colors resize-none"
           rows={2}
           value={content.extra}
           onChange={e => onChange({ extra: e.target.value })}
