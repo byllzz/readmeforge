@@ -121,7 +121,7 @@ No sign‑up. No server. No tracking. Your data is saved **locally in your brows
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 readmeforge/
