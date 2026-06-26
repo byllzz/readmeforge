@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { ReadmeForgeLogo } from "./LandingIcons";
+import { useState } from 'react';
+import { ReadmeForgeLogo } from './LandingIcons';
 
 export default function LandingNavbar({ onSignIn }) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const navLinks = ["Product", "Features", "Pricing", "Resources"];
+  // const navLinks = ['Product', 'Features', 'Pricing', 'Resources'];
 
   return (
     <nav className="sticky top-0 z-50 bg-[#f5f4ef]/95 backdrop-blur border-b border-gray-200">
@@ -16,7 +16,7 @@ export default function LandingNavbar({ onSignIn }) {
         </div>
 
         {/* Desktop navigation */}
-        <div className="hidden md:flex items-center gap-6 text-sm text-gray-700">
+        {/* <div className="hidden md:flex items-center gap-6 text-sm text-gray-700">
           {navLinks.map((item) => (
             <button key={item} className="hover:text-gray-900 flex items-center gap-1">
               {item}
@@ -25,7 +25,7 @@ export default function LandingNavbar({ onSignIn }) {
               </svg>
             </button>
           ))}
-        </div>
+        </div> */}
 
         {/* Desktop CTAs */}
         <div className="hidden md:flex items-center gap-3">
@@ -56,11 +56,21 @@ export default function LandingNavbar({ onSignIn }) {
         >
           {mobileOpen ? (
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           ) : (
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
             </svg>
           )}
         </button>
@@ -69,8 +79,8 @@ export default function LandingNavbar({ onSignIn }) {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden border-t border-gray-200 bg-[#f5f4ef] px-6 py-4 space-y-4">
-          <div className="flex flex-col gap-2">
-            {navLinks.map((item) => (
+          {/* <div className="flex flex-col gap-2">
+            {navLinks.map(item => (
               <button
                 key={item}
                 onClick={() => setMobileOpen(false)}
@@ -78,11 +88,16 @@ export default function LandingNavbar({ onSignIn }) {
               >
                 {item}
                 <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </button>
             ))}
-          </div>
+          </div> */}
           <div className="flex flex-col gap-3 pt-3 border-t border-gray-200">
             <a
               href="https://github.com/byllzz/readmeforge.git"

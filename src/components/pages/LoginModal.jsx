@@ -5,7 +5,7 @@ export default function LoginModal({ onLogin, onClose, inline = false, inputRef 
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     const trimmed = email.trim().toLowerCase();
     if (!trimmed || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
@@ -37,9 +37,7 @@ export default function LoginModal({ onLogin, onClose, inline = false, inputRef 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           {!inline && (
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">
-              Email address
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">Email address</label>
           )}
           <div className="relative">
             <Mail
@@ -50,7 +48,7 @@ export default function LoginModal({ onLogin, onClose, inline = false, inputRef 
               ref={inputRef}
               type="email"
               value={email}
-              onChange={(e) => {
+              onChange={e => {
                 setEmail(e.target.value);
                 setError('');
               }}
@@ -63,7 +61,10 @@ export default function LoginModal({ onLogin, onClose, inline = false, inputRef 
           </div>
           {error && (
             <p className="text-red-500 text-xs mt-1.5 flex items-center gap-1">
-              <span><FileWarning size={12} /></span> {error}
+              <span>
+                <FileWarning size={12} />
+              </span>{' '}
+              {error}
             </p>
           )}
         </div>
@@ -82,7 +83,9 @@ export default function LoginModal({ onLogin, onClose, inline = false, inputRef 
       {/* Divider */}
       <div className="flex items-center gap-3 my-5">
         <div className="flex-1 h-px bg-gray-100" />
-        <span className="text-[10px] text-gray-400 uppercase tracking-wider font-medium">Privacy first</span>
+        <span className="text-[10px] text-gray-400 uppercase tracking-wider font-medium">
+          Privacy first
+        </span>
         <div className="flex-1 h-px bg-gray-100" />
       </div>
 
@@ -90,8 +93,9 @@ export default function LoginModal({ onLogin, onClose, inline = false, inputRef 
       <div className="flex items-start gap-2.5 p-3 rounded-xl bg-gray-50 border border-gray-100">
         <Shield size={16} className="text-emerald-500 mt-0.5 shrink-0" />
         <p className="text-xs text-gray-500 leading-relaxed">
-          No password needed — your data is saved{' '}
-          <strong className="text-gray-700">locally on this device</strong>. Nothing is ever sent to a server.
+          No password needed - your data is saved{' '}
+          <strong className="text-gray-700">locally on this device</strong>. Nothing is ever sent to
+          a server.
         </p>
       </div>
     </div>
