@@ -1,4 +1,4 @@
-import { LogOut } from "lucide-react";
+import { LogOut } from 'lucide-react';
 
 export default function UserAccountPreview({ email, onLogout }) {
   const displayName = email ? email.split('@')[0] : 'User';
@@ -12,7 +12,10 @@ export default function UserAccountPreview({ email, onLogout }) {
         <p className="text-[12px] text-gray-500">Free plan</p>
       </div>
       <button
-        onClick={onLogout}
+        onClick={() => {
+          onLogout();
+          // confirm popup need to be added...
+        }}
         className="text-gray-400 hover:text-gray-700 p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
         title="Sign out"
       >

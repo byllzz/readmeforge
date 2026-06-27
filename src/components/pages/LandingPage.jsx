@@ -91,10 +91,10 @@ function SplitHero({ onLogin, inputRef }) {
           >
             {'Build '}
             {typed}
-            <span
+            {/* <span
               className="inline-block w-[3px] rounded-[1px] bg-violet-600 ml-[3px] align-bottom"
               style={{ height: '0.82em', animation: 'blink 1s step-end infinite' }}
-            />
+            /> */}
           </h2>
         </div>
 
