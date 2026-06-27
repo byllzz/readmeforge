@@ -18,11 +18,11 @@ export default function UserAccountPreview({ email, onLogout }) {
         </div>
         <div className="flex-1 min-w-0 leading-tight">
           <p className="text-[14px] font-medium text-gray-800 truncate">{displayName}</p>
-          <p className="text-[12px] text-gray-500">ReadmeForge User</p>
+          <p className="text-[12px] text-gray-500">Free plan</p>
         </div>
         <button
           onClick={() => setShowConfirm(true)}
-          className="text-gray-400 hover:text-gray-700 p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
+          className="text-gray-400! hover:text-gray-700! p-1.5 rounded-lg hover:bg-gray-100! transition-colors"
           title="Sign out"
         >
           <LogOut size={18} />
@@ -46,13 +46,13 @@ export default function UserAccountPreview({ email, onLogout }) {
               <div className="flex gap-3 justify-center">
                 <button
                   onClick={() => setShowConfirm(false)}
-                  className="px-6 py-2.5 text-sm! font-medium text-gray-700! bg-gray-100! rounded-xl hover:bg-gray-200! transition-colors"
+                  className="px-6 py-2.5 text-sm font-medium text-gray-700! bg-gray-100! rounded-xl hover:bg-gray-200! transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleLogout}
-                  className="px-6 py-2.5 text-sm! font-medium text-white! bg-red-600! rounded-xl hover:bg-red-700! transition-colors"
+                  className="px-6 py-2.5 text-sm font-medium text-white! bg-red-600! rounded-xl hover:bg-red-700! transition-colors"
                 >
                   Yes, sign out
                 </button>

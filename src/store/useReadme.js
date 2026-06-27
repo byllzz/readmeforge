@@ -12,31 +12,30 @@ const useReadme = create(
       blocks: DEFAULT_BLOCKS.map(createBlock),
       activeBlockId: null,
 
-      addBlock: (type) =>
-        set((s) => ({ blocks: [...s.blocks, createBlock(type)] })),
+      addBlock: type => set(s => ({ blocks: [...s.blocks, createBlock(type)] })),
 
-      removeBlock: (id) => 
-        set((s) => ({
-          blocks: s.blocks.filter((b) => b.id !== id),
+      removeBlock: id =>
+        set(s => ({
+          blocks: s.blocks.filter(b => b.id !== id),
           activeBlockId: s.activeBlockId === id ? null : s.activeBlockId,
         })),
 
-      reorderBlocks: (blocks) => set({ blocks }),
+      reorderBlocks: blocks => set({ blocks }),
 
       updateBlock: (id, patch) =>
-        set((s) => ({
-          blocks: s.blocks.map((b) =>
-            b.id === id ? { ...b, content: { ...b.content, ...patch } } : b
+        set(s => ({
+          blocks: s.blocks.map(b =>
+            b.id === id ? { ...b, content: { ...b.content, ...patch } } : b,
           ),
         })),
 
-      setActiveBlock: (id) => set({ activeBlockId: id }),
+      setActiveBlock: id => set({ activeBlockId: id }),
 
       getMarkdown: () => blocksToMarkdown(get().blocks),
 
-      duplicateBlock: (id) =>
-        set((s) => {
-          const idx = s.blocks.findIndex((b) => b.id === id);
+      duplicateBlock: id =>
+        set(s => {
+          const idx = s.blocks.findIndex(b => b.id === id);
           if (idx === -1) return s;
           const copy = {
             ...JSON.parse(JSON.stringify(s.blocks[idx])),
@@ -46,17 +45,29 @@ const useReadme = create(
           next.splice(idx + 1, 0, copy);
           return { blocks: next };
         }),
+
+      // Reset blocks to initial template
+      resetToInitialTemplate: () => {
+        set({ blocks: DEFAULT_BLOCKS.map(createBlock), activeBlockId: null });
+      },
+
+      // Completely clear everything
+      clearAllData: () => {
+        set({ blocks: [], activeBlockId: null });
+      },
     }),
     {
-      // Dynamic storage key: 'readmeforge:activeEmail:blocks' (e.g., 'readmeforge:user@example.com:blocks')
+      // Dynamic storage key based on email
       name: () => {
         const email = localStorage.getItem(ACTIVE_EMAIL_KEY);
         return email ? `readmeforge:${email}:blocks` : 'readmeforge:blocks';
       },
-      // If you want to save other parts of the store (like activeBlockId), keep the default.
-      // The partialize option can be used to exclude temporary state.
-    }
-  )
+      partialize: state => ({
+        blocks: state.blocks,
+        activeBlockId: state.activeBlockId,
+      }),
+    },
+  ),
 );
 
 export default useReadme;

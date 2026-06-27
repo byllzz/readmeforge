@@ -19,18 +19,14 @@ function AppRoutes() {
     setLoggedIn(!!email);
   }, []);
 
-  const handleLogin = (email) => {
-    // Save email and workspace
+  const handleLogin = email => {
+    // Save email
     localStorage.setItem(ACTIVE_EMAIL_KEY, email);
-    const workspaceKey = `readmeforge:${email}:blocks`;
-    if (!localStorage.getItem(workspaceKey)) {
-      localStorage.setItem(workspaceKey, JSON.stringify([]));
-    }
 
     // Check if this is the first login ever
     const hasLoggedBefore = localStorage.getItem(FIRST_LOGIN_KEY);
     if (!hasLoggedBefore) {
-      // First login: show the full animated spinner
+      // First login ever: show fancy spinner
       localStorage.setItem(FIRST_LOGIN_KEY, 'true');
       setShowFancySpinner(true);
       setIsTransitioning(true);
@@ -40,9 +36,9 @@ function AppRoutes() {
         setIsTransitioning(false);
         setShowFancySpinner(false);
         navigate('/app');
-      }, 5500); // full experience
+      }, 5500);
     } else {
-      // Returning user: show simple circle spinner briefly
+      // Returning user: show simple spinner
       setShowFancySpinner(false);
       setIsTransitioning(true);
 
@@ -50,17 +46,39 @@ function AppRoutes() {
         setLoggedIn(true);
         setIsTransitioning(false);
         navigate('/app');
-      }, 1000); // quick transition
+      }, 1000);
     }
   };
 
   const handleLogout = () => {
+    // Get the current email
+    const email = localStorage.getItem(ACTIVE_EMAIL_KEY);
+
+    // Remove ALL localStorage data for this email
+    if (email) {
+      // Remove the blocks data
+      const workspaceKey = `readmeforge:${email}:blocks`;
+      localStorage.removeItem(workspaceKey);
+      // Remove any other email-specific data if exists
+    }
+
+    // Remove the active email
     localStorage.removeItem(ACTIVE_EMAIL_KEY);
-    setLoggedIn(false);
-    navigate('/');
+
+    // Show spinner during transition
+    setShowFancySpinner(false);
+    setIsTransitioning(true);
+
+    setTimeout(() => {
+      setLoggedIn(false);
+      setIsTransitioning(false);
+      navigate('/');
+      // Force page reload to clear all state
+      window.location.reload();
+    }, 500);
   };
 
-  // Render the appropriate spinner while transitioning
+  // Render spinner while transitioning
   if (isTransitioning) {
     return showFancySpinner ? <LoadingSpinner /> : <SimpleSpinner />;
   }
@@ -69,23 +87,11 @@ function AppRoutes() {
     <Routes>
       <Route
         path="/"
-        element={
-          loggedIn ? (
-            <Navigate to="/app" replace />
-          ) : (
-            <LandingPage onLogin={handleLogin} />
-          )
-        }
+        element={loggedIn ? <Navigate to="/app" replace /> : <LandingPage onLogin={handleLogin} />}
       />
       <Route
         path="/app"
-        element={
-          !loggedIn ? (
-            <Navigate to="/" replace />
-          ) : (
-            <Home onLogout={handleLogout} />
-          )
-        }
+        element={!loggedIn ? <Navigate to="/" replace /> : <Home onLogout={handleLogout} />}
       />
     </Routes>
   );

@@ -1,29 +1,33 @@
-import { useState, useEffect } from 'react'
-import BlockPalette from './components/editor/BlockPalette.jsx'
-import SortableBlockList from './components/editor/SortableBlockList.jsx'
-import MarkdownPreview from './components/preview/MarkdownPreview.jsx'
-import OnboardingPopup from './components/ui/OnboardingPopup.jsx'
-import { ChevronDown, Layers, LayoutGrid, X, } from 'lucide-react'
-import useReadme from './store/useReadme.js'
+import { useState, useEffect } from 'react';
+import BlockPalette from './components/editor/BlockPalette.jsx';
+import SortableBlockList from './components/editor/SortableBlockList.jsx';
+import MarkdownPreview from './components/preview/MarkdownPreview.jsx';
+import OnboardingPopup from './components/ui/OnboardingPopup.jsx';
+import { ChevronDown, Layers, LayoutGrid, X } from 'lucide-react';
+import useReadme from './store/useReadme.js';
 
 /*  Mobile Drawer  */
 function MobileDrawer({ open, onClose, title, children }) {
-  const [everOpened, setEverOpened] = useState(false)
+  const [everOpened, setEverOpened] = useState(false);
 
   useEffect(() => {
-    if (open) setEverOpened(true)
-  }, [open])
+    if (open) setEverOpened(true);
+  }, [open]);
 
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [open])
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [open]);
 
   useEffect(() => {
-    const handler = (e) => { if (e.key === 'Escape') onClose() }
-    window.addEventListener('keydown', handler)
-    return () => window.removeEventListener('keydown', handler)
-  }, [onClose])
+    const handler = e => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [onClose]);
 
   return (
     <>
@@ -98,19 +102,30 @@ function MobileNavbar({ blocksCount, onBlocksClick, onPaletteClick, activeTab })
 }
 
 export default function Home({ onLogout }) {
-  const email = localStorage.getItem('readmeforge_activeEmail') || 'user'
-  const { blocks } = useReadme()
+  const email = localStorage.getItem('readmeforge_activeEmail') || 'user';
+  const { blocks, resetToInitialTemplate, clearAllData } = useReadme();
 
-  const [paletteOpen, setPaletteOpen] = useState(false)
-  const [blocksOpen, setBlocksOpen] = useState(false)
-  const [mobileActiveTab, setMobileActiveTab] = useState(null)
-  const [showOnboarding, setShowOnboarding] = useState(false)
+  const [paletteOpen, setPaletteOpen] = useState(false);
+  const [blocksOpen, setBlocksOpen] = useState(false);
+  const [mobileActiveTab, setMobileActiveTab] = useState(null);
+  const [showOnboarding, setShowOnboarding] = useState(false);
 
-  // Show onboarding once per browser session (not per login)
+  // Reset to initial template when email changes (new login)
+  useEffect(() => {
+    // Check if we have blocks in localStorage for this email
+    const workspaceKey = `readmeforge:${email}:blocks`;
+    const savedBlocks = localStorage.getItem(workspaceKey);
+
+    // If no saved blocks exist, reset to initial template
+    if (!savedBlocks) {
+      resetToInitialTemplate();
+    }
+  }, [email, resetToInitialTemplate]);
+
+  // Show onboarding once per browser session
   useEffect(() => {
     const hasSeen = sessionStorage.getItem('readmeforge:onboarded');
     if (!hasSeen) {
-      // Small delay so the editor is visible first
       const timer = setTimeout(() => {
         setShowOnboarding(true);
         sessionStorage.setItem('readmeforge:onboarded', 'true');
@@ -155,17 +170,25 @@ export default function Home({ onLogout }) {
     setMobileActiveTab(null);
   };
 
+  // Handle logout - clear all data first
+  const handleLogoutWithReset = () => {
+    // Clear the store state
+    clearAllData();
+    // Call parent logout which handles localStorage cleanup and navigation
+    onLogout();
+  };
+
   return (
     <div className="flex flex-col h-screen ">
       <div className="flex flex-1 min-h-0">
         {/*  Left: Block palette — desktop only  */}
         <div className="hidden md:flex border-r border-[#d9d0d0]">
-          <BlockPalette userEmail={email} onLogout={onLogout} />
+          <BlockPalette userEmail={email} onLogout={handleLogoutWithReset} />
         </div>
 
         {/*  Center: Sortable editor — desktop only  */}
         <main className="hidden md:flex w-[41rem] shrink-0 flex-col min-h-0 ">
-          <div className="px-3 pt-3.5  flex items-center gap-1.5 shrink-0">
+          <div className="px-3 pt-3.5 flex items-center gap-1.5 shrink-0">
             <p className="text-[15px] font-medium text-gray-800">Area contains specific blocks</p>
             <ChevronDown size={16} className="text-gray-400" />
           </div>
@@ -174,7 +197,7 @@ export default function Home({ onLogout }) {
           </div>
         </main>
 
-        <div className=" h-screen w-[1px] bg-[#d9d0d0] relative hover:bg-blue-500 transition-colors hover:cursor-row-resize">
+        <div className="h-screen w-[1px] bg-[#d9d0d0] relative hover:bg-blue-500 transition-colors hover:cursor-row-resize">
           <div className="absolute top-1/2 -translate-y-1/2 h-[24px] w-2 rounded-full -left-[2.5px] bg-[#aaa] group-hover:bg-blue-500 shadow-2xl z-10" />
         </div>
 
@@ -185,18 +208,6 @@ export default function Home({ onLogout }) {
           </div>
         </div>
       </div>
-
-      {/*  "How it works" button (fixed bottom‑right)  */}
-      {/* <button
-        onClick={() => setShowOnboarding(true)}
-        className="fixed bottom-20 md:bottom-6 right-5 z-30 flex items-center gap-2 px-4 py-2.5 rounded-full
-                   bg-gray-900 text-white text-sm font-medium shadow-lg shadow-black/20
-                   hover:bg-gray-800 active:scale-[0.97] transition-all duration-200"
-        title="How it works"
-      >
-        <HelpCircle size={16} />
-        <span className="hidden sm:inline">How it works</span>
-      </button> */}
 
       {/*  Mobile Bottom Navbar  */}
       <MobileNavbar
@@ -211,7 +222,7 @@ export default function Home({ onLogout }) {
         <div
           style={{ display: 'flex', flexDirection: 'column', height: '100%', overflowY: 'auto' }}
         >
-          <BlockPalette userEmail={email} onLogout={onLogout} />
+          <BlockPalette userEmail={email} onLogout={handleLogoutWithReset} />
         </div>
       </MobileDrawer>
 
