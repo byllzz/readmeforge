@@ -107,106 +107,153 @@ export default function BlockPalette({ userEmail, onLogout, onAfterAdd }) {
     localStorage.setItem(PALETTE_STATE_KEY, JSON.stringify(isMinimized));
   }, [isMinimized]);
 
+  // State for logout confirmation in minimized mode
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+
+  const handleLogoutClick = () => {
+    setShowLogoutConfirm(true);
+  };
+
+  const handleConfirmLogout = () => {
+    setShowLogoutConfirm(false);
+    onLogout();
+  };
+
   return (
-    <aside
-      className={`
-        flex flex-col flex-shrink-0 h-full
-        transition-[width] duration-300 ease-in-out overflow-hidden
-        ${isMinimized ? 'w-[52px]' : 'w-full md:w-[286px]'}
-      `}
-    >
-      {isMinimized ? (
-        /* Collapsed icon rail */
-        <div
-          className="flex flex-col items-center py-3 gap-[3px] h-full overflow-y-auto "
-          style={{ scrollbarWidth: 'none' }}
-        >
-          <button
-            onClick={() => setIsMinimized(false)}
-            title="Expand sidebar"
-            className="
-              w-9 h-9 flex items-center justify-center rounded-md
-              text-gray-400 hover:text-gray-700 hover:bg-gray-100
-              border border-transparent hover:border-gray-200
-              transition-all duration-150
-            "
+    <>
+      <aside
+        className={`
+          flex flex-col flex-shrink-0 h-full
+          transition-[width] duration-300 ease-in-out overflow-hidden
+          ${isMinimized ? 'w-[52px]' : 'w-full md:w-[286px]'}
+        `}
+      >
+        {isMinimized ? (
+          /* Collapsed icon rail */
+          <div
+            className="flex flex-col items-center py-3 gap-[3px] h-full overflow-y-auto "
+            style={{ scrollbarWidth: 'none' }}
           >
-            <CollapseIcon />
-          </button>
-          {Object.values(BLOCK_CATEGORIES)
-            .flat()
-            .map(type => {
-              const meta = BLOCK_META[type];
-              if (!meta) return null;
-              const IconComponent = BLOCK_ICONS[type];
-              return (
-                <div key={type} className="relative group w-9">
-                  <button
-                    onClick={() => {
-                      addBlock(type);
-                      onAfterAdd?.();
-                    }}
-                    title={meta.label}
-                    className="
-                      w-9 h-9 flex items-center justify-center rounded-md
-                      bg-transparent hover:bg-gray-100
-                      border border-transparent hover:border-gray-200
-                      transition-all duration-150
-                    "
-                  >
-                    {IconComponent && <IconComponent size={18} style={{ color: '#000' }} />}
-                  </button>
-                  {/* Tooltip */}
-                  <div
-                    className="
-                    absolute left-full top-1/2 -translate-y-1/2 ml-3 z-50
-                    px-2.5 py-1.5 rounded-md
-                    bg-white border border-gray-200 shadow-lg
-                    text-gray-700 text-[11px] font-medium whitespace-nowrap
-                    opacity-0 group-hover:opacity-100 pointer-events-none
-                    translate-x-1 group-hover:translate-x-0
-                    transition-all duration-150
-                  "
-                  >
-                    {meta.label}
-                    <span className="absolute right-full top-1/2 -translate-y-1/2 border-[5px] border-transparent border-r-white" />
-                  </div>
-                </div>
-              );
-            })}
-          <div className="mt-auto pt-2 mb-2">
             <button
-              onClick={onLogout}
-              className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 hover:text-gray-700 hover:bg-gray-200 transition"
-              title={`Signed in as ${userEmail}`}
-            >
-              <LogOut size={14} />
-            </button>
-          </div>
-        </div>
-      ) : (
-        <>
-          <div className="px-4 py-2 border-b border-gray-200 flex items-center justify-between flex-shrink-0">
-            <div>
-              <p className="text-[22px] font-mono font-semibold text-gray-800">Blocks</p>
-              <p className="text-[11px] text-gray-500 mt-0.5">Add components to your README</p>
-            </div>
-            <button
-              onClick={() => setIsMinimized(true)}
-              title="Collapse sidebar"
+              onClick={() => setIsMinimized(false)}
+              title="Expand sidebar"
               className="
-                hidden md:flex p-1.5 rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100
+                w-9 h-9 flex items-center justify-center rounded-md
+                text-gray-400 hover:text-gray-700 hover:bg-gray-100
                 border border-transparent hover:border-gray-200
-                transition-all duration-150 relative bottom-2 left-2
+                transition-all duration-150
               "
             >
               <CollapseIcon />
             </button>
+            {Object.values(BLOCK_CATEGORIES)
+              .flat()
+              .map(type => {
+                const meta = BLOCK_META[type];
+                if (!meta) return null;
+                const IconComponent = BLOCK_ICONS[type];
+                return (
+                  <div key={type} className="relative group w-9">
+                    <button
+                      onClick={() => {
+                        addBlock(type);
+                        onAfterAdd?.();
+                      }}
+                      title={meta.label}
+                      className="
+                        w-9 h-9 flex items-center justify-center rounded-md
+                        bg-transparent hover:bg-gray-100
+                        border border-transparent hover:border-gray-200
+                        transition-all duration-150
+                      "
+                    >
+                      {IconComponent && <IconComponent size={18} style={{ color: '#000' }} />}
+                    </button>
+                    {/* Tooltip */}
+                    <div
+                      className="
+                      absolute left-full top-1/2 -translate-y-1/2 ml-3 z-50
+                      px-2.5 py-1.5 rounded-md
+                      bg-white border border-gray-200 shadow-lg
+                      text-gray-700 text-[11px] font-medium whitespace-nowrap
+                      opacity-0 group-hover:opacity-100 pointer-events-none
+                      translate-x-1 group-hover:translate-x-0
+                      transition-all duration-150
+                    "
+                    >
+                      {meta.label}
+                      <span className="absolute right-full top-1/2 -translate-y-1/2 border-[5px] border-transparent border-r-white" />
+                    </div>
+                  </div>
+                );
+              })}
+            <div className="mt-auto pt-2 mb-2">
+              <button
+                onClick={handleLogoutClick}
+                className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 hover:text-gray-700 hover:bg-gray-200 transition"
+                title={`Signed in as ${userEmail}`}
+              >
+                <LogOut size={14} />
+              </button>
+            </div>
           </div>
-          <BlockList addBlock={addBlock} onAfterAdd={onAfterAdd} />
-          <UserAccountPreview email={userEmail} onLogout={onLogout} />
-        </>
+        ) : (
+          <>
+            <div className="px-4 py-2 border-b border-gray-200 flex items-center justify-between flex-shrink-0">
+              <div>
+                <p className="text-[22px] font-mono font-semibold text-gray-800">Blocks</p>
+                <p className="text-[11px] text-gray-500 mt-0.5">Add components to your README</p>
+              </div>
+              <button
+                onClick={() => setIsMinimized(true)}
+                title="Collapse sidebar"
+                className="
+                  hidden md:flex p-1.5 rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100
+                  border border-transparent hover:border-gray-200
+                  transition-all duration-150 relative bottom-2 left-2
+                "
+              >
+                <CollapseIcon />
+              </button>
+            </div>
+            <BlockList addBlock={addBlock} onAfterAdd={onAfterAdd} />
+            <UserAccountPreview email={userEmail} onLogout={onLogout} />
+          </>
+        )}
+      </aside>
+
+      {/* Logout Confirmation Modal for minimized mode */}
+      {showLogoutConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 p-6 animate-in zoom-in-95 duration-200">
+            <div className="text-center">
+              <div className="w-16 h-16 rounded-full bg-red-100 mx-auto flex items-center justify-center mb-4">
+                <LogOut className="w-8 h-8 text-red-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Sign out?</h3>
+              <p className="text-gray-600 text-sm mb-6">
+                If you log out, your saved work for{' '}
+                <span className="font-medium text-gray-800">{userEmail}</span> will be erased. When
+                you sign in again with this email, you'll start fresh.
+              </p>
+              <div className="flex gap-3 justify-center">
+                <button
+                  onClick={() => setShowLogoutConfirm(false)}
+                  className="px-6 py-2.5 text-sm font-medium text-gray-700! bg-gray-100! rounded-xl hover:bg-gray-200! transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleConfirmLogout}
+                  className="px-6 py-2.5 text-sm font-medium text-white! bg-red-600! rounded-xl hover:bg-red-700! transition-colors"
+                >
+                  Yes, sign out
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
-    </aside>
+    </>
   );
 }
