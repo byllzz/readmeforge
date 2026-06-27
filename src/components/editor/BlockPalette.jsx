@@ -1,16 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BLOCK_META, BLOCK_TYPES, BLOCK_ICONS } from '../../lib/blocks.js';
 import useReadme from '../../store/useReadme.js';
 import { LogOut } from 'lucide-react';
-import UserAccountPreview from '../ui/UserAccountPreview.jsx'
+import UserAccountPreview from '../ui/UserAccountPreview.jsx';
 
 const BLOCK_CATEGORIES = {
-  'Header':    [BLOCK_TYPES.TITLE, BLOCK_TYPES.BADGES, BLOCK_TYPES.DESCRIPTION],
-  'Core':      [BLOCK_TYPES.FEATURES, BLOCK_TYPES.INSTALLATION, BLOCK_TYPES.USAGE],
-  'Media':     [BLOCK_TYPES.SCREENSHOTS],
-  'Technical': [BLOCK_TYPES.API, BLOCK_TYPES.CONTRIBUTING, BLOCK_TYPES.LICENSE],
-  'Custom':    [BLOCK_TYPES.CUSTOM],
+  Header: [BLOCK_TYPES.TITLE, BLOCK_TYPES.BADGES, BLOCK_TYPES.DESCRIPTION],
+  Core: [BLOCK_TYPES.FEATURES, BLOCK_TYPES.INSTALLATION, BLOCK_TYPES.USAGE],
+  Media: [BLOCK_TYPES.SCREENSHOTS],
+  Technical: [BLOCK_TYPES.API, BLOCK_TYPES.CONTRIBUTING, BLOCK_TYPES.LICENSE],
+  Custom: [BLOCK_TYPES.CUSTOM],
 };
+
+const PALETTE_STATE_KEY = 'readmeforge_palette_minimized';
 
 function CollapseIcon() {
   return (
@@ -48,11 +50,13 @@ function BlockList({ addBlock, onAfterAdd }) {
             "
           >
             {/* Icon box */}
-            <div className="
+            <div
+              className="
               w-8 h-8 flex-shrink-0 flex items-center justify-center rounded-md
               group-hover:border-gray-200
               transition-all duration-150
-            ">
+            "
+            >
               {IconComponent && <IconComponent size={17} style={{ color: '#000' }} />}
             </div>
 
@@ -62,13 +66,22 @@ function BlockList({ addBlock, onAfterAdd }) {
             </span>
 
             {/* “+” indicator */}
-            <span className="
+            <span
+              className="
               ml-auto flex-shrink-0 text
               opacity-0 group-hover:opacity-100
               translate-x-1 group-hover:translate-x-0
               transition-all duration-150
-            ">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            "
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
                 <line x1="12" y1="5" x2="12" y2="19" />
                 <line x1="5" y1="12" x2="19" y2="12" />
               </svg>
@@ -82,7 +95,17 @@ function BlockList({ addBlock, onAfterAdd }) {
 
 export default function BlockPalette({ userEmail, onLogout, onAfterAdd }) {
   const addBlock = useReadme(s => s.addBlock);
-  const [isMinimized, setIsMinimized] = useState(false);
+
+  // Initialize state from localStorage
+  const [isMinimized, setIsMinimized] = useState(() => {
+    const saved = localStorage.getItem(PALETTE_STATE_KEY);
+    return saved ? JSON.parse(saved) : false;
+  });
+
+  // Save to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem(PALETTE_STATE_KEY, JSON.stringify(isMinimized));
+  }, [isMinimized]);
 
   return (
     <aside
