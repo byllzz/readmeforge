@@ -1,17 +1,21 @@
 @import "tailwindcss";
 
-*, *::before, *::after { box-sizing: border-box; }
-
-:root {
-  /* --bg:#1F1F1E; */
-  --bg : #f5f4ef;
-  /* --bg : #F8F8F6; */
-  --text: #000000;
-  --font-outfit: 'Outfit', sans-serif;
-  --font-mono:"IBM Plex Serif", serif;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-html, body, #root {
+:root {
+  --bg: #f5f4ef;
+  --text: #000000;
+  --font-outfit: 'Outfit', sans-serif;
+  --font-mono: "IBM Plex Serif", serif;
+}
+
+html,
+body,
+#root {
   height: 100%;
   background: var(--bg) !important;
   color: var(--text);
@@ -21,17 +25,47 @@ html, body, #root {
   -webkit-font-smoothing: antialiased;
 }
 
-::-webkit-scrollbar { width: 4px;height: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; width : 4px !important; }
-::selection { background: var(--accent-bg); color: var(--accent); }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: var(--radius); }
+/* global element resets here */
+@layer base {
 
-input, textarea, select, button {
-  font-family: var(--font);
-  font-size: 14px;
-  color: inherit;
-  background: none;
-  border: none;
+  input,
+  textarea,
+  select,
+  button {
+    font-family: var(--font);
+    font-size: 14px;
+    color: inherit;
+    background: none;
+    border: none;
+  }
+
+  button {
+    cursor: pointer;
+  }
 }
-button { cursor: pointer; }
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border2);
+  border-radius: 2px;
+  width: 4px !important;
+}
+
+::selection {
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius);
+}
