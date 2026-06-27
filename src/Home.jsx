@@ -109,18 +109,21 @@ export default function Home({ onLogout }) {
   const [blocksOpen, setBlocksOpen] = useState(false);
   const [mobileActiveTab, setMobileActiveTab] = useState(null);
   const [showOnboarding, setShowOnboarding] = useState(false);
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
 
-  // Reset to initial template when email changes (new login)
+  // Only reset to initial template on first load if no data exists
   useEffect(() => {
-    // Check if we have blocks in localStorage for this email
-    const workspaceKey = `readmeforge:${email}:blocks`;
-    const savedBlocks = localStorage.getItem(workspaceKey);
+    if (isFirstLoad) {
+      const workspaceKey = `readmeforge:${email}:blocks`;
+      const savedData = localStorage.getItem(workspaceKey);
 
-    // If no saved blocks exist, reset to initial template
-    if (!savedBlocks) {
-      resetToInitialTemplate();
+      // Only reset if no saved data exists
+      if (!savedData) {
+        resetToInitialTemplate();
+      }
+      setIsFirstLoad(false);
     }
-  }, [email, resetToInitialTemplate]);
+  }, [email, resetToInitialTemplate, isFirstLoad]);
 
   // Show onboarding once per browser session
   useEffect(() => {

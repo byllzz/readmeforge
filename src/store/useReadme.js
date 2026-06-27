@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage } from 'zustand/middleware';
 import { createBlock } from '../lib/blocks.js';
 import { blocksToMarkdown } from '../lib/markdown.js';
 
@@ -46,7 +46,7 @@ const useReadme = create(
           return { blocks: next };
         }),
 
-      // Reset blocks to initial template
+      // Reset blocks to initial template - only used for new users
       resetToInitialTemplate: () => {
         set({ blocks: DEFAULT_BLOCKS.map(createBlock), activeBlockId: null });
       },
@@ -57,11 +57,25 @@ const useReadme = create(
       },
     }),
     {
-      // Dynamic storage key based on email
-      name: () => {
-        const email = localStorage.getItem(ACTIVE_EMAIL_KEY);
-        return email ? `readmeforge:${email}:blocks` : 'readmeforge:blocks';
-      },
+      name: 'readmeforge-workspace', // Fixed internal handle name
+      storage: createJSONStorage(() => ({
+        // Dynamically point to the correct email key whenever Zustand reads/writes
+        getItem: () => {
+          const email = localStorage.getItem(ACTIVE_EMAIL_KEY);
+          const key = email ? `readmeforge:${email}:blocks` : 'readmeforge:blocks';
+          return localStorage.getItem(key);
+        },
+        setItem: (name, value) => {
+          const email = localStorage.getItem(ACTIVE_EMAIL_KEY);
+          const key = email ? `readmeforge:${email}:blocks` : 'readmeforge:blocks';
+          localStorage.setItem(key, value);
+        },
+        removeItem: () => {
+          const email = localStorage.getItem(ACTIVE_EMAIL_KEY);
+          const key = email ? `readmeforge:${email}:blocks` : 'readmeforge:blocks';
+          localStorage.removeItem(key);
+        },
+      })),
       partialize: state => ({
         blocks: state.blocks,
         activeBlockId: state.activeBlockId,
