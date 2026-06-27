@@ -59,7 +59,6 @@ function AppRoutes() {
       // Remove the blocks data
       const workspaceKey = `readmeforge:${email}:blocks`;
       localStorage.removeItem(workspaceKey);
-      // Remove any other email-specific data if exists
     }
 
     // Remove the active email
