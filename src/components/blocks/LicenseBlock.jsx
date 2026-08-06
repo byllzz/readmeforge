@@ -5,7 +5,7 @@ export default function LicenseBlock({ content, onChange }) {
     <div className="space-y-4">
       {/* License type selector */}
       <div className="space-y-1.5">
-        <label className="block text-[10px] text-gray-500 font-mono uppercase tracking-wider">
+        <label className="block text-[10px] text-gray-500  uppercase tracking-wider">
           License type
         </label>
         <div className="flex flex-wrap gap-1.5">
@@ -13,7 +13,7 @@ export default function LicenseBlock({ content, onChange }) {
             <button
               key={l}
               onClick={() => onChange({ type: l })}
-              className={`px-2.5 py-1.5 text-xs font-mono rounded-lg border! transition-all duration-200 ${
+              className={`px-2.5 py-1.5 text-xs  rounded-lg border! transition-all duration-200 ${
                 content.type === l
                   ? 'border-gray-500! text-gray-700! bg-gray-100! shadow-sm'
                   : 'border-gray-200! text-gray-500! hover:border-gray-300! hover:text-gray-700! hover:bg-gray-50!'
@@ -28,11 +28,11 @@ export default function LicenseBlock({ content, onChange }) {
       {/* Year + Author row */}
       <div className="flex gap-3">
         <div className="flex-1 space-y-1.5">
-          <label className="block text-[10px] text-gray-500 font-mono uppercase tracking-wider">
+          <label className="block text-[10px] text-gray-500  uppercase tracking-wider">
             Year
           </label>
           <input
-            className="w-full bg-white border! border-gray-200! rounded-lg px-3 py-2 text-gray-700! font-mono text-sm
+            className="w-full bg-white border! border-gray-200! rounded-lg px-3 py-2 text-gray-700!  text-sm
                        focus:outline-none focus:border-gray-400! focus:ring-1 focus:ring-gray-400/20!
                        placeholder:text-gray-400! transition-colors"
             value={content.year || ''}
@@ -41,11 +41,11 @@ export default function LicenseBlock({ content, onChange }) {
           />
         </div>
         <div className="flex-1 space-y-1.5">
-          <label className="block text-[10px] text-gray-500 font-mono uppercase tracking-wider">
+          <label className="block text-[10px] text-gray-500  uppercase tracking-wider">
             Author
           </label>
           <input
-            className="w-full bg-white border! border-gray-200! rounded-lg px-3 py-2 text-gray-700! font-mono text-sm
+            className="w-full bg-white border! border-gray-200! rounded-lg px-3 py-2 text-gray-700!  text-sm
                        focus:outline-none focus:border-gray-400! focus:ring-1 focus:ring-gray-400/20!
                        placeholder:text-gray-400! transition-colors"
             value={content.author || ''}

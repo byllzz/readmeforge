@@ -30,7 +30,7 @@ export default function FeaturesBlock({ content, onChange }) {
       <button
         onClick={add}
         className="w-full border-2! border-dashed border-gray-200! hover:border-amber-400! bg-gray-50! hover:bg-gray-100!
-                   text-gray-500! hover:text-amber-600! text-sm font-mono py-2.5 rounded-lg transition-all duration-200"
+                   text-gray-500! hover:text-amber-600! text-sm  py-2.5 rounded-lg transition-all duration-200"
       >
         + add feature
       </button>

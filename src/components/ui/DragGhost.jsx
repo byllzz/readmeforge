@@ -19,7 +19,7 @@ export default function DragGhost({ block, meta }) {
         <span className="text-[10px] text-gray-400 truncate mt-0.5">Drag to reorder</span>
       </div>
       <div className="flex-shrink-0 px-1.5 py-0.5 rounded-md bg-gray-100 border border-gray-200">
-        <span className="text-[9px] font-mono text-gray-500 uppercase tracking-wide">moving</span>
+        <span className="text-[9px]  text-gray-500 uppercase tracking-wide">moving</span>
       </div>
     </div>
   );

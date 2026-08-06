@@ -3,7 +3,7 @@ export default function TitleBlock({ content, onChange }) {
     <div className="space-y-4">
       {/* Project name — large, bold feel */}
       <div className="space-y-1.5">
-        <label className="block text-[10px] text-gray-500 font-mono uppercase tracking-wider">
+        <label className="block text-[10px] text-gray-500  uppercase tracking-wider">
           Project name
         </label>
         <input
@@ -18,7 +18,7 @@ export default function TitleBlock({ content, onChange }) {
 
       {/* Tagline */}
       <div className="space-y-1.5">
-        <label className="block text-[10px] text-gray-500 font-mono uppercase tracking-wider">
+        <label className="block text-[10px] text-gray-500  uppercase tracking-wider">
           Tagline
         </label>
         <input

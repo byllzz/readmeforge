@@ -9,7 +9,7 @@ export default function ContributingBlock({ content, onChange }) {
     <div className="space-y-3">
       {/* Intro text */}
       <div className="space-y-1">
-        <label className="block text-[10px] text-gray-500 font-mono uppercase tracking-wider">
+        <label className="block text-[10px] text-gray-500  uppercase tracking-wider">
           Intro text
         </label>
         <textarea
@@ -25,13 +25,13 @@ export default function ContributingBlock({ content, onChange }) {
 
       {/* Steps */}
       <div className="space-y-1">
-        <label className="block text-[10px] text-gray-500 font-mono uppercase tracking-wider">
+        <label className="block text-[10px] text-gray-500  uppercase tracking-wider">
           Steps
         </label>
         <div className="space-y-2">
           {steps.map((step, i) => (
             <div key={i} className="flex items-center gap-2">
-              <span className="text-pink-500 text-sm font-mono font-bold w-5 shrink-0">
+              <span className="text-pink-500 text-sm  font-bold w-5 shrink-0">
                 {i + 1}.
               </span>
               <input
@@ -54,7 +54,7 @@ export default function ContributingBlock({ content, onChange }) {
           <button
             onClick={addStep}
             className="w-full border-2! border-dashed! border-gray-200! hover:border-pink-400! bg-gray-50! hover:bg-gray-100!
-                       text-gray-500! hover:text-pink-600! text-sm font-mono py-2.5 rounded-lg transition-all duration-200"
+                       text-gray-500! hover:text-pink-600! text-sm  py-2.5 rounded-lg transition-all duration-200"
           >
             + add step
           </button>

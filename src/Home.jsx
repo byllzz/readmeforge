@@ -1,33 +1,40 @@
-import { useState, useEffect } from 'react';
-import BlockPalette from './components/editor/BlockPalette.jsx';
-import SortableBlockList from './components/editor/SortableBlockList.jsx';
-import MarkdownPreview from './components/preview/MarkdownPreview.jsx';
-import OnboardingPopup from './components/ui/OnboardingPopup.jsx';
-import { ChevronDown, Layers, LayoutGrid, X } from 'lucide-react';
-import useReadme from './store/useReadme.js';
+import { useState, useEffect, useRef } from "react";
+import BlockPalette from "./components/editor/BlockPalette.jsx";
+import SortableBlockList from "./components/editor/SortableBlockList.jsx";
+import MarkdownPreview from "./components/preview/MarkdownPreview.jsx";
+import OnboardingTour from "./components/ui/OnboardingTour.jsx";
+import ResetConfirmationModal from "./components/ui/ResetConfirmationModal.jsx";
+import { HelpCircle, Layers, LayoutGrid, RefreshCw, X } from "lucide-react";
+import useReadme from "./store/useReadme.js";
 
-/*  Mobile Drawer  */
 function MobileDrawer({ open, onClose, title, children }) {
   const [everOpened, setEverOpened] = useState(false);
+  const drawerRef = useRef(null);
 
   useEffect(() => {
     if (open) setEverOpened(true);
   }, [open]);
 
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : '';
+    document.body.style.overflow = open ? "hidden" : "";
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, [open]);
 
   useEffect(() => {
-    const handler = e => {
-      if (e.key === 'Escape') onClose();
+    const handler = (e) => {
+      if (e.key === "Escape") onClose();
     };
-    window.addEventListener('keydown', handler);
-    return () => window.removeEventListener('keydown', handler);
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
   }, [onClose]);
+
+  useEffect(() => {
+    if (open && drawerRef.current) {
+      drawerRef.current.focus();
+    }
+  }, [open]);
 
   return (
     <>
@@ -35,9 +42,11 @@ function MobileDrawer({ open, onClose, title, children }) {
         onClick={onClose}
         aria-hidden="true"
         className="md:hidden fixed inset-0 z-50 bg-black/30 backdrop-blur-sm transition-opacity duration-300"
-        style={{ opacity: open ? 1 : 0, pointerEvents: open ? 'auto' : 'none' }}
+        style={{ opacity: open ? 1 : 0, pointerEvents: open ? "auto" : "none" }}
       />
       <div
+        ref={drawerRef}
+        tabIndex={-1}
         role="dialog"
         aria-modal="true"
         aria-label={title}
@@ -45,7 +54,7 @@ function MobileDrawer({ open, onClose, title, children }) {
                    bg-white border-l border-gray-200
                    flex flex-col overflow-hidden
                    transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
-        style={{ transform: open ? 'translateX(0)' : 'translateX(100%)' }}
+        style={{ transform: open ? "translateX(0)" : "translateX(100%)" }}
       >
         <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 shrink-0">
           <span className="text-[13px] font-medium text-gray-600">{title}</span>
@@ -67,15 +76,19 @@ function MobileDrawer({ open, onClose, title, children }) {
   );
 }
 
-/*  Mobile Bottom Navbar  */
-function MobileNavbar({ blocksCount, onBlocksClick, onPaletteClick, activeTab }) {
+function MobileNavbar({
+  blocksCount,
+  onBlocksClick,
+  onPaletteClick,
+  activeTab,
+}) {
   return (
     <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 shadow-lg shadow-black/5">
       <div className="flex items-center justify-around h-16 px-4 pb-safe">
         <button
           onClick={onBlocksClick}
           className={`flex flex-col items-center justify-center gap-1 w-full h-full rounded-lg transition-colors
-            ${activeTab === 'blocks' ? 'text-emerald-600' : 'text-gray-400 hover:text-gray-600'}`}
+            ${activeTab === "blocks" ? "text-emerald-600" : "text-gray-400 hover:text-gray-600"}`}
         >
           <div className="relative">
             <Layers size={20} />
@@ -91,7 +104,7 @@ function MobileNavbar({ blocksCount, onBlocksClick, onPaletteClick, activeTab })
         <button
           onClick={onPaletteClick}
           className={`flex flex-col items-center justify-center gap-1 w-full h-full rounded-lg transition-colors
-            ${activeTab === 'palette' ? 'text-gray-800' : 'text-gray-400 hover:text-gray-600'}`}
+            ${activeTab === "palette" ? "text-gray-800" : "text-gray-400 hover:text-gray-600"}`}
         >
           <LayoutGrid size={20} />
           <span className="text-[11px] font-medium">Palette</span>
@@ -101,65 +114,64 @@ function MobileNavbar({ blocksCount, onBlocksClick, onPaletteClick, activeTab })
   );
 }
 
-export default function Home({ onLogout }) {
-  const email = localStorage.getItem('readmeforge_activeEmail') || 'user';
-  const { blocks, resetToInitialTemplate, clearAllData } = useReadme();
+function CenterBarHeader({ onReset, onRestartTour }) {
+  return (
+    <div className="px-4 pt-3.5 pb-2.5 flex items-center gap-1.5 shrink-0 border-b border-gray-100">
+      <p className="text-[15px] font-medium text-gray-800">
+        Your README blocks
+      </p>
+      {/* <-- removed the misleading ChevronDown */}
+
+      <div className="ml-auto flex items-center gap-1">
+        <button
+          onClick={onRestartTour}
+          title="How it works"
+          className="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[12px] font-medium text-gray-500 hover:text-blue-600 hover:bg-blue-50 border border-transparent hover:border-blue-100 transition-colors"
+        >
+          <HelpCircle size={14} />
+          <span className="hidden sm:inline">How it works</span>
+        </button>
+        <button
+          onClick={onReset}
+          title="Reset workspace"
+          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-[12px] font-medium text-gray-500 hover:text-red-500 hover:bg-red-50 border border-transparent hover:border-red-100 transition-colors"
+        >
+          <RefreshCw size={14} />
+          <span className="hidden sm:inline">Reset</span>
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default function Home({ userId, userName, userEmail, onLogout }) {
+  const { blocks, clearAllData, resetToInitialTemplate } = useReadme();
+  const tourRef = useRef();
 
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [blocksOpen, setBlocksOpen] = useState(false);
   const [mobileActiveTab, setMobileActiveTab] = useState(null);
-  const [showOnboarding, setShowOnboarding] = useState(false);
-  const [isFirstLoad, setIsFirstLoad] = useState(true);
-
-  // Only reset to initial template on first load if no data exists
-  useEffect(() => {
-    if (isFirstLoad) {
-      const workspaceKey = `readmeforge:${email}:blocks`;
-      const savedData = localStorage.getItem(workspaceKey);
-
-      // Only reset if no saved data exists
-      if (!savedData) {
-        resetToInitialTemplate();
-      }
-      setIsFirstLoad(false);
-    }
-  }, [email, resetToInitialTemplate, isFirstLoad]);
-
-  // Show onboarding once per browser session
-  useEffect(() => {
-    const hasSeen = sessionStorage.getItem('readmeforge:onboarded');
-    if (!hasSeen) {
-      const timer = setTimeout(() => {
-        setShowOnboarding(true);
-        sessionStorage.setItem('readmeforge:onboarded', 'true');
-      }, 600);
-      return () => clearTimeout(timer);
-    }
-  }, []);
-
-  const handleCloseOnboarding = () => {
-    setShowOnboarding(false);
-  };
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
 
   const handleBlocksClick = () => {
-    if (mobileActiveTab === 'blocks') {
+    if (mobileActiveTab === "blocks") {
       setBlocksOpen(false);
       setMobileActiveTab(null);
     } else {
       setBlocksOpen(true);
       setPaletteOpen(false);
-      setMobileActiveTab('blocks');
+      setMobileActiveTab("blocks");
     }
   };
 
   const handlePaletteClick = () => {
-    if (mobileActiveTab === 'palette') {
+    if (mobileActiveTab === "palette") {
       setPaletteOpen(false);
       setMobileActiveTab(null);
     } else {
       setPaletteOpen(true);
       setBlocksOpen(false);
-      setMobileActiveTab('palette');
+      setMobileActiveTab("palette");
     }
   };
 
@@ -173,46 +185,49 @@ export default function Home({ onLogout }) {
     setMobileActiveTab(null);
   };
 
-  // Handle logout - clear all data first
-  const handleLogoutWithReset = () => {
-    // Clear the store state
+  const handleRestartTour = () => {
+    if (tourRef.current) tourRef.current.restart();
+  };
+
+  const handleResetConfirmed = () => {
+    setShowResetConfirm(false);
     clearAllData();
-    // Call parent logout which handles localStorage cleanup and navigation
-    onLogout();
+    resetToInitialTemplate();
   };
 
   return (
-    <div className="flex flex-col h-screen ">
+    <div className="flex flex-col h-screen bg-white">
       <div className="flex flex-1 min-h-0">
-        {/*  Left: Block palette — desktop only  */}
-        <div className="hidden md:flex border-r border-[#d9d0d0]">
-          <BlockPalette userEmail={email} onLogout={handleLogoutWithReset} />
+        <div className="hidden md:flex border-r border-gray-200">
+          <BlockPalette
+            userId={userId}
+            userName={userName}
+            userEmail={userEmail}
+            onLogout={onLogout}
+          />
         </div>
 
-        {/*  Center: Sortable editor — desktop only  */}
-        <main className="hidden md:flex w-[41rem] shrink-0 flex-col min-h-0 ">
-          <div className="px-3 pt-3.5 flex items-center gap-1.5 shrink-0">
-            <p className="text-[15px] font-medium text-gray-800">Area contains specific blocks</p>
-            <ChevronDown size={16} className="text-gray-400" />
-          </div>
-          <div className="flex-1 overflow-y-auto ">
+        <main className="hidden md:flex w-[41rem] shrink-0 flex-col min-h-0 bg-white">
+          <CenterBarHeader
+            onReset={() => setShowResetConfirm(true)}
+            onRestartTour={handleRestartTour}
+          />
+          <div className="flex-1 overflow-y-auto">
             <SortableBlockList />
           </div>
         </main>
 
-        <div className="h-screen w-[1px] bg-[#d9d0d0] relative hover:bg-blue-500 transition-colors hover:cursor-row-resize">
-          <div className="absolute top-1/2 -translate-y-1/2 h-[24px] w-2 rounded-full -left-[2.5px] bg-[#aaa] group-hover:bg-blue-500 shadow-2xl z-10" />
+        <div className="hidden md:block w-[1px] bg-gray-200 relative hover:bg-blue-500 transition-colors">
+          <div className="absolute top-1/2 -translate-y-1/2 h-6 w-2 rounded-full -left-[3px] bg-gray-300 shadow-sm" />
         </div>
 
-        {/*  Right: Live preview  */}
-        <div className="flex-1 flex flex-col min-h-0 overflow-hidden bg-white pb-16 md:pb-0">
+        <div className="flex-1 flex flex-col min-h-0 overflow-hidden bg-white pb-16 md:pb-0 markdown-preview-container">
           <div className="flex-1 overflow-y-auto">
             <MarkdownPreview />
           </div>
         </div>
       </div>
 
-      {/*  Mobile Bottom Navbar  */}
       <MobileNavbar
         blocksCount={blocks.length}
         onBlocksClick={handleBlocksClick}
@@ -220,23 +235,50 @@ export default function Home({ onLogout }) {
         activeTab={mobileActiveTab}
       />
 
-      {/*  Mobile drawers  */}
-      <MobileDrawer open={paletteOpen} onClose={handleClosePalette} title="Block palette">
+      <MobileDrawer
+        open={paletteOpen}
+        onClose={handleClosePalette}
+        title="Block palette"
+      >
         <div
-          style={{ display: 'flex', flexDirection: 'column', height: '100%', overflowY: 'auto' }}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            height: "100%",
+            overflowY: "auto",
+          }}
         >
-          <BlockPalette userEmail={email} onLogout={handleLogoutWithReset} />
+          <BlockPalette
+            userId={userId}
+            userName={userName}
+            userEmail={userEmail}
+            onLogout={onLogout}
+          />
         </div>
       </MobileDrawer>
 
-      <MobileDrawer open={blocksOpen} onClose={handleCloseBlocks} title="Blocks">
+      <MobileDrawer
+        open={blocksOpen}
+        onClose={handleCloseBlocks}
+        title="Blocks"
+      >
         <div className="flex flex-col h-full">
+          <CenterBarHeader
+            onReset={() => setShowResetConfirm(true)}
+            onRestartTour={handleRestartTour}
+          />
           <SortableBlockList />
         </div>
       </MobileDrawer>
 
-      {/*  Onboarding popup  */}
-      {showOnboarding && <OnboardingPopup onClose={handleCloseOnboarding} />}
+      <ResetConfirmationModal
+        userName={userName}
+        isOpen={showResetConfirm}
+        onConfirm={handleResetConfirmed}
+        onCancel={() => setShowResetConfirm(false)}
+      />
+
+      <OnboardingTour ref={tourRef} />
     </div>
   );
 }

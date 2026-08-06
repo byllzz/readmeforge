@@ -1,7 +1,7 @@
 export default function DescriptionBlock({ content, onChange }) {
   return (
     <div className="space-y-1">
-      <label className="block text-[10px] text-gray-500 font-mono uppercase tracking-wider">
+      <label className="block text-[10px] text-gray-500  uppercase tracking-wider">
         About text
       </label>
       <textarea

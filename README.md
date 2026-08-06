@@ -1,96 +1,99 @@
-# <a href="https://thereadmeforge.vercel.app" target="_blank">ReadmeForge - Visual README Builder</a>
-
-> Build stunning GitHub‑ready READMEs in minutes. No markdown skills needed.
-
-<p align="left">
-  <img src="https://img.shields.io/badge/Status-active-9B72FF?style=flat" />
-  <img src="https://img.shields.io/badge/Built%20with-React%20%2B%20Vite-9B72FF?style=flat" />
-  <img src="https://img.shields.io/badge/Styling-Tailwind%20CSS-9B72FF?style=flat" />
-  <img src="https://img.shields.io/badge/license-MIT-9B72FF?style=flat" />
-  <a href="https://github.com/byllzz">
-    <img src="https://img.shields.io/badge/Author-Bilal%20Malik-9B72FF?style=flat" />
+<p align="center">
+  <a href="https://thereadmeforge.vercel.app/">
+    <img src="./src/assets//preview.png" alt="ReadmeForge Preview">
   </a>
-  <img src="https://img.shields.io/badge/Deployed%20on-Vercel-9B72FF?style=flat" />
-  <img src="https://img.shields.io/badge/Latest%20Release-14%20May%202026-9B72FF.svg" alt="Latest Release Badge" />
 </p>
 
-<br />
+<h1 align="center">ReadmeForge</h1>
 
-[![Visit ReadmeForge](https://img.shields.io/badge/View-thereadmeforge-9B72FF?style=flat)](https://thereadmeforge.vercel.app)
+<p align="center">
+ ReadmeForge is a visual, block-based README builder that lets developers create polished GitHub documentation without manually writing Markdown. Using 11 purpose-built content blocks (Title, Badges, API Docs, Screenshots, and more), you can drag, drop, reorder, and fill in content to build a perfect README.md.
+</p>
 
-<img width="100%" alt="ReadmeForge Preview" src="./src/assets/previews/homePreview.png" />
-<img width="100%" alt="ReadmeForge Preview" src="./src/assets/previews/appPreview.png" />
+<p align="center">
+  <img src="https://img.shields.io/badge/Status-Active-9B72FF?style=flat" />
+  <img src="https://img.shields.io/badge/Tailwind-v4-9B72FF?style=flat" />
+  <img src="https://img.shields.io/badge/License-MIT-9B72FF?style=flat" />
+  <img src="https://img.shields.io/badge/Deploy-Vercel-9B72FF?style=flat" />
+  <img src="https://img.shields.io/badge/React-Vite-9B26FF?style=flat"/>
+  <img src="https://img.shields.io/badge/JavaScript-ES6+-9B26FF?style=flat"/>
+  <img src="https://img.shields.io/badge/License-MIT-9B26FF?style=flat"/>
+</p>
 
-⭐ **Star it on GitHub** if it saved you from writing yet another README from scratch.
-
----
-
-## What is ReadmeForge?
-
-ReadmeForge is a **visual, block‑based README editor** that lets you craft professional GitHub documentation without touching raw markdown. Drag, drop, reorder, and fill in content - then copy or download a perfect `README.md` with one click.
-
-Eleven purpose‑built block types cover everything a modern open‑source project needs: from title & badges to screenshots, API docs, and contributing guides. A live preview renders exactly what GitHub will display, while the code view shows the raw markdown with full syntax highlighting.
-
-No sign‑up. No server. No tracking. Your data is saved **locally in your browser**, keyed by any email you choose - giving you multiple isolated workspaces for different projects.
-
----
-
-##  Features
-
-**Core editor** <br>
-✔️ **11 block types** - Title, Badges, Description, Features, Installation, Usage, Screenshots, API, Contributing, License, Custom Markdown<br>
-✔️ **Drag‑and‑drop reordering** - powered by `@dnd-kit`, with smooth sorting animations and a drag‑ghost preview<br>
-✔️ **Collapsible sidebar** - expand to browse blocks with Lucide icons, collapse to a slim icon rail for maximum screen real estate<br>
-✔️ **Duplicate & remove** - right inside the block header<br>
-
-**Live preview & code view** <br>
-✔️ **Real‑time markdown rendering** - parsed by `marked`, custom renderer for images, badges, and error states<br>
-✔️ **Syntax‑highlighted code view** - `react-syntax-highlighter` with Prism, duotone‑light theme, line numbers, and forced word‑wrap<br>
-✔️ **Tab switcher** - toggle between Preview and Code with a single click<br>
-
-**Export & sharing** <br>
-✔️ **Copy raw markdown** - one‑click to clipboard<br>
-✔️ **Download as `README.md`** - instant file download with proper `.md` extension<br>
-✔️ **Live stats** - word count, file size (KB), and image count updated in real time<br>
-
-**Screenshots block** <br>
-✔️ **Upload from device** - drag‑and‑drop or click to select; images converted to base64 for persistent local storage<br>
-✔️ **Paste from clipboard** - Ctrl+V any image directly into a screenshot entry<br>
-✔️ **URL input** - paste remote image URLs; live badge preview for shields.io badges<br>
-✔️ **Alt text & captions** - accessibility‑friendly with optional captions<br>
-✔️ **Reorder & replace** - move screenshots up/down, replace with a new file<br>
-
-**Data & persistence** <br>
-✔️ **Email‑based workspaces** - enter any email to save your README blocks; switch emails for different projects<br>
-✔️ **`localStorage` persistence** - Zustand with `persist` middleware, keyed per email<br>
-✔️ **No backend** - everything stays on your device, completely private<br>
-✔️ **Base64 images** - uploaded screenshots are stored inline, surviving page refreshes<br>
-
-**UX & accessibility** <br>
-✔️ **Onboarding popup** - 5‑step walkthrough shown once per browser session (re‑openable via a fixed "How it works" button)<br>
-✔️ **Mobile‑responsive** - bottom navbar on small screens with Blocks & Palette tabs; slide‑in drawers for mobile editing<br>
-✔️ **Resizable panels** - thin draggable divider between the editor and preview on desktop<br>
-✔️ **Collapsed icon rail** - minimize the block palette to a thin icon strip with tooltips<br>
-✔️ **Keyboard shortcuts** - `Escape` closes mobile drawers<br>
-
----
+<p align="center">
+  <a href="https://thereadmeforge.vercel.app">Live Demo</a> •
+  <a href="https://github.com/byllzz/readmeforge/issues/new">Report Bug</a> •
+  <a href="https://github.com/byllzz/readmeforge/issues/new">Request Feature</a>
+</p>
 
 
-# Usage
+# About Readmeforge
 
-1. Enter any email on the landing page - your workspace is created instantly.
-2. Browse the **Blocks** panel on the left - click any block to add it to your README.
-3. Drag blocks to reorder them in the center panel. Humanity really looked at sticky notes and thought, “what if software.”
-4. Click a block header to expand its editor and fill in your content.
-5. The right panel shows a live preview of your README - switch to **Code View** to see raw Markdown.
-6. Use the **Copy** and **Download** buttons in the toolbar to export your README.
-7. Upload screenshots via drag-and-drop or file picker - URLs are filled automatically.
-8. Click **"How it works"** (fixed button, bottom-right) to replay the onboarding walkthrough. Because apparently we now need tutorials for tutorials.
-9. On mobile, use the bottom navbar to access **Blocks** and **Palette** drawers.
+**ReadmeForge** is an open-source **visual README builder** that helps developers create polished GitHub documentation without manually writing Markdown. Using reusable content blocks, you can build, rearrange, preview, and export professional README files entirely from your browser.
 
----
+Everything updates in **real-time**, allowing you to switch between a live GitHub preview and raw Markdown whenever needed. Images are automatically compressed and uploaded through a lightweight serverless proxy, keeping exported README files clean and portable.
 
-#  Block Types
+**No sign-up, no tracking.** Your data is saved **locally in your browser**, keyed by a unique user ID derived from the email you enter-giving you multiple isolated workspaces for different projects.
+
+
+
+# Highlights
+
+- Build README files visually with reusable blocks
+- Live GitHub-style Markdown preview
+- Syntax-highlighted code editor
+- Built-in screenshot management
+- One-click Markdown export
+- Local-first workspace storage
+- Fully responsive interface
+- Privacy-focused with no accounts
+
+
+# Features
+
+## 1. Editor
+
+- **11 documentation blocks** covering everything from project titles to API docs.
+- **Drag & drop reordering** powered by `@dnd-kit`.
+- **Duplicate, remove & rearrange** blocks effortlessly.
+- **Collapsible sidebar** for a distraction-free workspace.
+
+## 2. Preview
+
+- **Live Markdown rendering** powered by `marked`.
+- **Syntax-highlighted code view** using Prism.
+- **Instant Preview ↔ Code switching** with synchronized updates.
+
+## 3. Export
+
+- **Copy Markdown** directly to your clipboard.
+- **Download a production-ready `README.md`.**
+- **Real-time statistics** including word count, file size, and image count.
+
+## 4. Media
+
+- **Drag & drop**, **clipboard paste**, or **URL imports** for screenshots.
+- **Automatic image compression** before upload.
+- **Hosted image URLs** instead of Base64.
+- **Alt text, captions, reorder, and replace** support.
+
+## 5. Storage
+
+- **Email-based workspaces** with isolated projects.
+- **Persistent local storage** using Zustand.
+- **Serverless image hosting** via a Vercel proxy.
+- **No backend or user accounts.**
+
+## 6. Experience
+
+- **Interactive onboarding** for first-time users.
+- **Responsive layout** across desktop and mobile.
+- **Keyboard shortcuts** for faster navigation.
+- **Minimal, distraction-free interface.**
+
+
+
+# Block Types
 
 | Block | Icon | Description |
 |---|---|---|
@@ -106,141 +109,207 @@ No sign‑up. No server. No tracking. Your data is saved **locally in your brows
 | License | Scale | License type, year, author |
 | Custom | Code | Free-form markdown textarea |
 
----
 
-#  How Data Is Stored
+
+# How It Works / Usage
+
+1. **Create a workspace** – Enter any email on the login screen. Your workspace ID is generated instantly-no verification needed.
+2. **Add documentation blocks** – Browse the **Blocks** panel on the left and click any block to add it to your README.
+3. **Arrange them** – Drag blocks to reorder them in the center panel. Humanity really looked at sticky notes and thought, “what if software.”
+4. **Fill each block** – Click a block header to expand its editor and enter your project information.
+5. **Preview in real-time** – The right panel shows a live preview of your README. Switch to **Code View** to see raw Markdown.
+6. **Export** – Use the **Copy** and **Download** buttons in the toolbar to export your README.
+7. **Upload screenshots** – Drag & drop or use the file picker. The app compresses them and hosts them externally, keeping your markdown clean.
+8. **Replay the tour** – Click **"How it works"** (top of the center panel) to replay the onboarding walkthrough. Because apparently we now need tutorials for tutorials.
+9. **Mobile editing** – On small screens, use the bottom navbar to access **Blocks** and **Palette** drawers. Press `Escape` to close them.
+
+
+
+# How Data Is Stored
 
 | Setting | Description |
 |---|---|
-| Workspace key | `readmeforge:{email}:blocks` in `localStorage` |
-| Active email | Stored in `localStorage` under `readmeforge_activeEmail` |
-| Images | Converted to base64 Data URLs and saved inline with block content |
-| Onboarding | `sessionStorage` - shown once per browser session |
-| Clear data | Clear `localStorage` keys or switch to a different email |
+| Workspace key | `readmeforge:{userId}:blocks` in `localStorage` |
+| Active user ID | Stored in `localStorage` under `readmeforge_active_user_id` (UUID generated from your email) |
+| User email & name | Stored in `localStorage` for identity preview |
+| Images | Uploaded to an external host via Vercel proxy; returned as clean `https://` URLs |
+| Onboarding | `localStorage` – shown once per session (`readmeforge:onboarded`) |
+| Clear data | Clear all `localStorage` keys or switch to a different email on the login screen |
 
 
----
 
-##  Project Structure
+# Architecture
 
-```
+ReadmeForge follows a simple **client-first architecture** where editing, previewing, and exporting documentation happen inside the browser.
+
+- Block-based editing system
+- Live Markdown rendering
+- LocalStorage persistence
+- Serverless image uploads
+- Zero backend database
+- Fast client-side rendering
+
+
+
+# Built With
+
+<p align="left">
+  <img src="https://skillicons.dev/icons?i=react,vite,tailwind,js,git,vercel,npm" />
+</p>
+
+### Core Technologies
+
+- **React 19** - Modern UI library
+- **Vite** - Lightning-fast build tool
+- **Tailwind CSS v4** - Utility-first styling
+- **JavaScript (ES6+)** - Application logic
+- **React Router** - Client-side routing
+
+### Libraries & Packages
+
+- **@dnd-kit** - Accessible drag-and-drop interactions
+- **Zustand** - Lightweight global state management
+- **Marked** - Markdown parsing and rendering
+- **DOMPurify** - Secure HTML sanitization
+- **React Syntax Highlighter** - Prism-powered code highlighting
+- **Lucide React** - Modern icon library
+- **React Icons** - Additional icon collections
+- **React Joyride** - Interactive onboarding tours
+
+### Deployment
+
+- **Vercel** - Hosting & Serverless Functions
+
+
+# Project Structure
+
+```text
 readmeforge/
-├── public/
-│ ├── favicon.svg
-│ ├── apple-touch-icon.png
-│ ├── og-image.png
-│ └── site.webmanifest
+├── api/                 # Serverless functions for image uploads
+├── public/              # Static assets, icons, and metadata
 ├── src/
-│ ├── components/
-│ │ ├── blocks/
-│ │ │ ├── TitleBlock.jsx # project name & tagline
-│ │ │ ├── BadgesBlock.jsx # shields.io badge editor with preview
-│ │ │ ├── DescriptionBlock.jsx # long‑form project description
-│ │ │ ├── FeaturesBlock.jsx # bulleted feature list
-│ │ │ ├── InstallationBlock.jsx # package manager selector + code
-│ │ │ ├── UsageBlock.jsx # language selector + code editor
-│ │ │ ├── ScreenshotsBlock.jsx # upload, preview, captions, reorder
-│ │ │ ├── ApiBlock.jsx # function signature, description, params
-│ │ │ ├── ContributingBlock.jsx # intro text + numbered steps
-│ │ │ ├── LicenseBlock.jsx # license type, year, author
-│ │ │ └── CustomBlock.jsx # free‑form markdown textarea
-│ │ ├── editor/
-│ │ │ ├── BlockPalette.jsx # collapsible sidebar with Lucide icons
-│ │ │ ├── SortableBlockList.jsx # dnd‑kit sortable container
-│ │ │ └── BlockItem.jsx # individual block header + expanded editor
-│ │ ├── preview/
-│ │ │ └── MarkdownPreview.jsx # live preview, code view, toolbar, footer
-│ │ ├── pages/
-│ │ │ └── LandingPage.jsx # marketing site (pricing, FAQ, footer)
-│ │ ├── LandingNavbar.jsx # responsive navbar with hamburger
-│ │ ├── LandingPricing.jsx # Free / Pro / Max plan cards
-│ │ ├── LandingFAQ.jsx # accordion FAQ section
-│ │ ├── LandingFooter.jsx # footer with links & social icons
-│ │ ├── OnboardingPopup.jsx # 5‑step guided walkthrough
-│ │ ├── LoadingSpinner.jsx # animated loading screen on login
-│ │ └── LoginModal.jsx # email‑only login modal
-│ ├── lib/
-│ │ ├── blocks.js # block types, meta, icons, defaults
-│ │ └── markdown.js # blocks → markdown generator
-│ ├── store/
-│ │ └── useReadme.js # Zustand store with persist middleware
-│ ├── App.jsx # routing (landing vs editor)
-│ ├── Home.jsx # main 3‑panel editor layout
-│ └── main.jsx
-├── index.html
+│   ├── components/      # Reusable blocks, editor, preview, pages & UI
+│   ├── lib/             # Markdown generation and shared utilities
+│   ├── store/           # Zustand state management with persistence
+│   ├── App.jsx          # Application routing (Auth → Dashboard)
+│   ├── Home.jsx         # Main three-panel editor interface
+│   ├── main.jsx         # Entry point
+│   └── index.css        # Tailwind + custom preview styles
 ├── package.json
 ├── vite.config.js
-├── tailwind.config.js
 └── README.md
 ```
-##  Tech Stack
 
-- [**React**](https://react.dev/) + [**Vite**](https://vitejs.dev/) - component architecture and build tooling
-- [**Tailwind CSS**](https://tailwindcss.com/) - utility‑first styling, fully white/light theme
-- [**Zustand**](https://docs.pmnd.rs/zustand) - lightweight state management with `persist` middleware
-- [**@dnd‑kit**](https://dndkit.com/) - accessible drag‑and‑drop for block reordering
-- [**react‑syntax‑highlighter**](https://github.com/react-syntax-highlighter/react-syntax-highlighter) - Prism‑powered code highlighting
-- [**marked**](https://marked.js.org/) - markdown parsing with custom renderers
-- [**Lucide React**](https://lucide.dev/) - consistent, beautiful icon set
-- [**Vercel**](https://vercel.com) - deployment and hosting
----
+# Getting Started
 
-##  Getting Started
+Before running the project locally, ensure you have:
+
+- Node.js (Latest LTS)
+- npm
+- A modern web browser
+
+## Installation
 
 ```bash
-# clone the repo
 git clone https://github.com/byllzz/readmeforge.git
+
 cd readmeforge
 
-# install dependencies
 npm install
 
-# run locally
 npm run dev
-
-# build for production
-npm run build
-
 ```
 
-## Contributing
+Open the local development URL shown in your terminal.
 
-Got a better excuse? Found a tone that's missing? Open a PR.
+### Production Build
 
 ```bash
-# 1. fork the repo
-# 2. create your branch
+npm run build
+```
+
+Preview the production build locally.
+
+```bash
+npm run preview
+```
+
+
+
+# Contributing
+
+Contributions of all sizes are welcome.
+
+You can help by:
+
+- Adding new documentation blocks
+- Improving Markdown generation
+- Fixing bugs
+- Enhancing accessibility
+- Optimizing performance
+- Improving the editor experience
+- Building new features
+
+## Development Workflow
+
+```bash
+# Fork the repository
+
 git checkout -b feat/your-feature
 
-# 3. make your changes
-# 4. commit
 git commit -m "feat: add your feature"
 
-# 5. push and open a PR
 git push origin feat/your-feature
 ```
 
-**Ways to contribute:**
+Open a Pull Request once your changes are ready.
 
-- Add new block types - follow the existing pattern in `blocks.js` and create a matching `*Block.jsx` component.
-- Improve the markdown generator - tweak `markdown.js` for cleaner or more flexible output. Tiny formatting wars, the true backbone of software engineering.
-- Enhance the landing page - improve sections, copy, or overall design.
-- Fix bugs - please open an issue first so the problem can be discussed before implementation. Humans do enjoy discovering three different interpretations of the same bug.
-- Improve accessibility - add ARIA labels, improve focus management, and strengthen keyboard navigation.
-- Add new features to existing blocks - for example:
-  - More badge providers
-  - Additional license types
-  - Better customization options
+For larger features or architectural changes, opening an issue before implementation is recommended.
 
----
 
-##  Pull Request Guidelines
+# Author
 
-- Keep PRs focused - one feature or one fix per PR.
-- If you're unsure whether something fits the project scope, open an issue first for discussion.
+<img src="https://github.com/byllzz.png" width="90" alt="Bilal Malik"/>
 
----
+## Bilal Malik
 
-# License 
+[![GitHub](https://img.shields.io/badge/GitHub-byllzz-9B72FF?style=flat&logo=github&logoColor=white)](https://github.com/byllzz)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Bilal%20Malik-9B72FF?style=flat&logo=linkedin&logoColor=white)](https://linkedin.com/in/bilalmlkdev)
+[![X](https://img.shields.io/badge/Twiiter-@bilalmlkdev-9B72FF?style=flat&logo=x&logoColor=white)](https://x.com/bilalmlkdev)
 
-This project is licensed under the MIT License - see the [LICENSE.md](./LICENSE) file for details.
+If you found this project useful, consider leaving a ⭐ on GitHub. It helps the project reach more developers and supports future improvements.
+
+<p align="right">
+  <a href="#readmeforge">⬆ Back to Top</a>
+</p>
+
+
+# License (MIT)
+
+This project is licensed under the **MIT License**.
+
+```text
+
+MIT License
+
+Copyright (c) 2026 Bilal Malik
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software.The above copyright notice and this permission notice shall
+be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+```
+
+© 2026 Readmeforge. Licensed under the MIT License.
+
