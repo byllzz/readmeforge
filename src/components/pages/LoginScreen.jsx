@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { FaGithub, } from "react-icons/fa";
 
+import logo from '../../assets/favicon.svg'
+
 export default function LoginScreen({ onLogin }) {
   // Pre-filled with demo email to match original behavior
   const [email, setEmail] = useState("demo@gmail.com");
@@ -58,8 +60,8 @@ export default function LoginScreen({ onLogin }) {
         {/* Brand Footer */}
         <div className="mt-14 pt-6 border-t border-gray-200">
           <div className="flex flex-col items-start gap-2 mb-3">
-            <div className="w-8 h-8 bg-black flex items-center justify-center rounded">
-              <span className="text-white font-bold text-sm">R</span>
+            <div className="w-8 h-8 bg-black flex items-center justify-center rounded-md">
+              <img src={logo} alt="Readmeforge Logo" />
             </div>
             <span className="text-[15px] font-medium text-black">
               ReadmeForge
@@ -72,26 +74,32 @@ export default function LoginScreen({ onLogin }) {
 
           <p className="text-[14px] text-gray-400 mb-5">
             Having trouble? Visit our{" "}
-            <a
+            <button
+            disabled
               href="#"
-              className="underline decoration-gray-300 hover:decoration-gray-500"
+              className="underline cursor-not-allowed decoration-gray-300 hover:decoration-gray-500"
             >
               Help Center
-            </a>{" "}
+            </button>{" "}
             or{" "}
-            <a
+            <button
               href="#"
-              className="underline decoration-gray-300 hover:decoration-gray-500"
+              className="underline cursor-not-allowed decoration-gray-300 hover:decoration-gray-500"
             >
               contact us
-            </a>
+            </button>
           </p>
 
           <div className="flex items-center gap-4 text-gray-400">
-
-            <button className="hover:text-gray-600 transition-colors">
-              <FaGithub size={22} />
-            </button>
+            <a
+              href="https://github.com/byllzz/readmeforge"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors"
+              title="View on GitHub"
+            >
+              <FaGithub size={18} />
+            </a>
           </div>
         </div>
       </div>
