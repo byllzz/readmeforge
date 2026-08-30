@@ -6,7 +6,7 @@ import AboutSection from "./AboutSection";
 import CTASection from "./CTASection";
 import Footer from "./Footer";
 import HowItWorksSection from "./HowItWorksSection";
-import previewImg from "../../assets/preview.png";
+import previewImg from "../../assets/dashboard.png";
 
 const container = {
   hidden: {},
