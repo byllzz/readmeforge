@@ -4,13 +4,13 @@
   </a>
 </p>
 
-<h1 align="center">ReadmeForge</h1>
+<h1 align="left">ReadmeForge</h1>
 
-<p align="center">
+<p align="left">
  ReadmeForge is a visual, block-based README builder that lets developers create polished GitHub documentation without manually writing Markdown. Using 11 purpose-built content blocks (Title, Badges, API Docs, Screenshots, and more), you can drag, drop, reorder, and fill in content to build a perfect README.md.
 </p>
 
-<p align="center">
+<p align="left">
   <img src="https://img.shields.io/badge/Status-Active-9B72FF?style=flat" />
   <img src="https://img.shields.io/badge/Tailwind-v4-9B72FF?style=flat" />
   <img src="https://img.shields.io/badge/License-MIT-9B72FF?style=flat" />
@@ -20,11 +20,6 @@
   <img src="https://img.shields.io/badge/License-MIT-9B26FF?style=flat"/>
 </p>
 
-<p align="center">
-  <a href="https://thereadmeforge.vercel.app">Live Demo</a> •
-  <a href="https://github.com/byllzz/readmeforge/issues/new">Report Bug</a> •
-  <a href="https://github.com/byllzz/readmeforge/issues/new">Request Feature</a>
-</p>
 
 
 # About Readmeforge

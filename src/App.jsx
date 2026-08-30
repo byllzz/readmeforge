@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Home from "./Home";
+import LandingPage from "./components/landing/LandingPage";
 import LoginScreen from "./components/pages/LoginScreen";
 import LoadingSpinner from "./components/ui/LoadingSpinner";
 import NotFound from "./components/pages/NotFound";
@@ -122,7 +123,8 @@ function Dashboard() {
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<AuthFlow />} />
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/login" element={<AuthFlow />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

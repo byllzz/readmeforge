@@ -17,6 +17,33 @@
   --accent: #3b82f6;
   --accent-bg: #eff6ff;
   --radius: 6px;
+
+  /* shadcn-style tokens mapped to the palette above, used by ported landing sections */
+  --background: #ffffff;
+  --foreground: #111111;
+  --card: #ffffff;
+  --card-foreground: #111111;
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --muted: #f7f7f5;
+  --muted-foreground: #6b7280;
+  --accent-2: #eff6ff;
+  --accent-2-foreground: #3b82f6;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent-2);
+  --color-accent-foreground: var(--accent-2-foreground);
+  --color-border: var(--border);
+  --font-grandstander: "Grandstander";
 }
 
 html,
